@@ -22,7 +22,7 @@ import axios from "axios";
 axios.defaults.headers.common["x-auth-token"] = auth.getJwt();
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.interceptors.response.use(null, error => {
-  alert(error.message);
+  console.log(error.message);
   return Promise.reject(error);
 });
 

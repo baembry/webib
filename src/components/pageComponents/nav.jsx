@@ -27,7 +27,9 @@ class NavBar extends Component {
             >
               Continue
             </button>
-            <button className="btn btn-success modal-btn">Register</button>
+            <NavLink className="btn btn-success modal-btn" to="/users">
+              Register
+            </NavLink>
           </div>
         </div>
       );

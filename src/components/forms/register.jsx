@@ -67,7 +67,9 @@ class Register extends Component {
           </button>
         </form>
         {this.state.flash ? (
-          <div className="alert alert-danger flash">{this.state.flash}</div>
+          <div className="flash-container">
+            <div className="alert alert-danger flash">{this.state.flash}</div>
+          </div>
         ) : null}
       </div>
     );
