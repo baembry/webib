@@ -1,0 +1,36 @@
+functionality to add
+-add foreign language articles to compareEntriesByTitle (got Eng, FR, D, Span.)
+-et al.
+-lettered dates, like 1998a, 1998b
+-Suffixes like Jr. (see MLA 187)
+-citing introduction, preface, foreword, afterword (MLA 194); the difficulty here is that the intro and book have different authors; probably need a separate entry Type for this.
+-apa6 styles change is mysteriously affecting standardStyles at styles.js 256
+
+Refactors
+-refactor search algorithms: get innermostValues, return innermostValues.find(value => value ===target)
+
+Questions
+-currently I load all entries to newEntry and filter on search. Is that scalable? Probably not.
+
+
+to make a production build:
+    run in terminal: npm run build
+
+to serve the run build, run in terminal
+    npm i -g serve
+    serve -s build
+
+heroku 
+    heroku login
+
+
+
+
+====================TECHNOLOGIES USED==================
+node.js, express
+mongodb, mongoose
+React
+joi for data validation
+bcryptjs for password encryption
+Sentry for error loging
+git for version control

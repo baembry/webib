@@ -1,0 +1,289 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ==============generic styles================ */
+.clickable:hover {
+  cursor: pointer;
+  color: rgb(183, 102, 196);
+}
+
+.hover:hover {
+  color: rgb(183, 102, 196);
+}
+
+/* =========================targeted styles====================== */
+.navbar {
+  padding: 0.5rem 2.718rem;
+  background: #e3f2fd;
+}
+.alert .btn.modal-btn {
+  margin: 0.5rem 0.5rem 0 0;
+}
+/* ===================LANDING PAGE============================= */
+.landing {
+  margin: auto;
+  padding-top: 13vh;
+  width: 78%;
+  text-align: center;
+  position: relative;
+}
+
+.landing ul {
+  width: 78%;
+  margin: 2rem auto;
+  text-align: left;
+  font-size: 1.27rem;
+}
+
+.landing .exhortation {
+  font-size: 2rem;
+}
+
+.landing .btn {
+  margin: 1rem;
+}
+
+.landing__modal {
+  position: relative;
+  top: -8rem;
+}
+
+/* ===================ENTRIES PAGE============================= */
+
+.entries {
+  width: 78%;
+  margin: auto;
+}
+
+.entries__controls {
+  margin: 2.72rem auto;
+  width: 78%;
+}
+
+.entries__controls .dropdowns,
+.entries__controls .create-options,
+.entries__controls .checkboxes {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.entries__controls .dropdowns select {
+  margin: 0 1rem 0 0;
+}
+
+.entries__controls .create-options div {
+  margin: 0 0.5rem 0 0;
+}
+
+.entries__controls .checkboxes input {
+  margin: 0 1rem 0 0;
+}
+
+.entries__controls label {
+  margin: 0 1rem 0 0;
+}
+
+/* .entries__controls > * {
+  margin: 0.272rem 0rem;
+  text-align: center;
+} */
+
+.search-bar {
+  margin: 20px 0;
+}
+
+.dropdown {
+  width: auto;
+}
+
+/* .options div {
+  margin: 5px;
+} */
+
+.entries .entry {
+  margin: 0.23rem 0.23rem;
+}
+/* ===================SHOW ENTRY MODAL============================= */
+
+.showEntry__backdrop {
+  background: rgba(208, 214, 224, 0.5);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.showEntry {
+  background: white;
+  border: 2px solid grey;
+
+  padding: 1rem;
+  position: absolute;
+  z-index: 100;
+  width: 78vw;
+}
+
+.showEntry__addToCollection {
+  width: 25%;
+}
+
+.showEntry__buttons {
+  min-width: 40rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.showEntry .btn {
+  margin: 0 1rem;
+  width: 6em;
+}
+
+.showEntry .info {
+  border: 1px solid lightblue;
+  padding: 1rem;
+  margin: 1rem 1rem;
+}
+
+/* =========================COLLECTIONS========================== */
+
+.collections {
+  width: 78%;
+  margin: 2rem auto;
+}
+
+.collection-line {
+  margin: 2rem 0;
+}
+
+.collection-name {
+  display: inline-block;
+  width: 20%;
+}
+
+/* ========================NEW ENTRY=========================*/
+.new-entry {
+  width: 78%;
+  margin: auto;
+  display: flex;
+}
+.new-entry__buttons {
+  width: 78%;
+  margin: 1rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e3f2fd;
+}
+.new-entry__buttons button {
+  margin: 0.27rem 0.54rem;
+  max-width: 9rem;
+  font-size: 0.8rem;
+}
+
+input:invalid {
+  background: rgba(249, 199, 208, 0.5);
+}
+
+.form-container {
+  width: 50%;
+  margin: 1rem;
+}
+.form-container .form-container__instructions {
+  color: rgb(133, 168, 226);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(133, 168, 226);
+  margin: 0 0 1rem 0;
+}
+
+.search-results {
+  margin: 1rem;
+}
+
+.search-results__instructions {
+  color: rgb(133, 168, 226);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(133, 168, 226);
+  margin: 0 0 1rem 0;
+}
+/*============================REGISTER and LOGIN=========================*/
+
+.register,
+.login {
+  position: relative;
+  width: 78%;
+  margin: 2rem auto;
+}
+
+.register button,
+.login button {
+  margin: 1rem 0;
+}
+.flash-container {
+  z-index: 100;
+  position: fixed;
+  float: left;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(76, 99, 134, 0.5);
+}
+.flash {
+  margin: 28vh auto;
+  text-align: center;
+}
+
+/* =======================STYLES=========================== */
+.style-form {
+  width: 78%;
+  margin: 5rem auto;
+}
+
+.style-form div {
+  margin: 1rem 0;
+}
+
+.style-form .radio {
+  margin: 1rem;
+}
+
+.style-form .template {
+  width: 8rem;
+  margin: 0 0.28rem;
+  display: inline-block;
+}
+
+.form-control.dropdown.et-al {
+  display: inline;
+  margin: 0 1rem;
+}
+/* ==============================My Styles================================*/
+
+.my-styles {
+  width: 78%;
+  margin: 2rem auto;
+}
+
+.my-styles .my-styles__style {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.my-styles .my-styles__buttons {
+  float: right;
+  margin-right: 50%;
+}
+.my-styles .btn {
+  margin: 0 1rem;
+}
+
+.my-styles .new-style {
+  margin: 2rem 0;
+}
