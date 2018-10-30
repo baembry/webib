@@ -129,15 +129,18 @@ class Display extends Component {
 
   handleAddToCollection = async collectionId => {
     const entriesToMove = [...this.state.entriesToMove];
-    entriesToMove.forEach(entryId => {
+    //loop is required for await
+    for (let entryId of entriesToMove) {
       try {
-        await axios.put("/collections/" + collectionId, { entryId, add: true  });
-        window.location =
-          this.props.location.pathname + "?collectionId=" + collectionId;
+        await axios.put("/collections/" + collectionId, { entryId, add: true });
       } catch (error) {
-        this.flashMessage("Error updating collection: ", error.message);
+        await this.flashMessage("Error updating collection: ", error.message);
       }
-    });
+    }
+    if (!this.state.flash) {
+      window.location =
+        this.props.location.pathname + "?collectionId=" + collectionId;
+    }
   };
 
   handleDeleteFromCollection = async id => {
