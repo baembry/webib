@@ -80,7 +80,7 @@ class FormClass extends Component {
     const requiredFields = forms[value].requiredFields;
     await this.setState({ data, counters, fieldsToGenerate, requiredFields });
     this.validateForm();
-  }; //change
+  };
 
   handleChange = async e => {
     let targetName = e.currentTarget.name;
@@ -153,14 +153,15 @@ class FormClass extends Component {
     const collectionId = this.props.match.params.collectionId;
     try {
       //data is pushed to two different db.collections on server
-      await axios.post("/entries", {
-        collectionId: collectionId,
-        entry: this.state.data
+      const response = await axios.post("/entries", {
+        entry: this.state.data,
+        collectionId: collectionId
       });
+      console.log("response: ", response);
     } catch (error) {
       console.log("Post to entries error: ", error);
     }
-    if (collectionId) {
+    if (collectionId !== undefined) {
       this.props.history.push("/entries?collectionId=" + collectionId);
     } else {
       this.props.history.push("/entries");

@@ -56,8 +56,13 @@ class Display extends Component {
     });
   }
 
-  getEntriesFromCollection = id =>
-    this.state.collections.find(collection => collection._id === id).entries;
+  getEntriesFromCollection = id => {
+    const collection = this.state.collections.find(
+      collection => collection._id === id
+    );
+    //in case id is undefined
+    return collection ? collection.entries : [];
+  };
 
   sortEntries = entries => {
     return this.state.activeStyle.sortAlgorithm(entries);
@@ -129,10 +134,15 @@ class Display extends Component {
 
   handleAddToCollection = async collectionId => {
     const entriesToMove = [...this.state.entriesToMove];
-    //loop is required for await
+    //loop is required for await because forEach invokes a function
     for (let entryId of entriesToMove) {
       try {
-        await axios.put("/collections/" + collectionId, { entryId, add: true });
+        console.log(`adding ${entryId} to collection ${collectionId}`);
+        let response = await axios.put("/collections/" + collectionId, {
+          entryId,
+          add: true
+        });
+        console.log(response);
       } catch (error) {
         await this.flashMessage("Error updating collection: ", error.message);
       }
@@ -195,10 +205,10 @@ class Display extends Component {
     //update db
     try {
       await axios.delete("/entries/" + id);
-      this.flashMessage("Entry Deleted");
+      await this.flashMessage("Entry Deleted");
       this.setState({ showEntry: false });
     } catch (error) {
-      this.flashMessage(
+      await this.flashMessage(
         "There was a problem deleting the entry: " + error.message
       );
       this.setState(originalState);

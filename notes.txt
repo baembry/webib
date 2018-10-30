@@ -11,6 +11,7 @@ Refactors
 -refactor search algorithms: get innermostValues, return innermostValues.find(value => value ===target)
 
 Questions
+-My post route to entries is returning status 500, but it still works. What't the deal?
 -currently I load all entries to newEntry and filter on search. Is that scalable? Probably not.
 
 
