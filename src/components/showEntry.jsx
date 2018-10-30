@@ -50,9 +50,9 @@ const ShowEntry = ({
               onChange={handleAddToCollection}
             >
               <option value={null}>Add to Collection...</option>
-              {collections.map(collection => {
+              {collections.map((collection, i) => {
                 return (
-                  <option key={collection._id} value={collection._id}>
+                  <option key={i} value={collection._id}>
                     {collection.name}
                   </option>
                 );

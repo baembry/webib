@@ -131,7 +131,7 @@ class Display extends Component {
     const entriesToMove = [...this.state.entriesToMove];
     entriesToMove.forEach(entryId => {
       try {
-        axios.put("/collections/" + collectionId, { add: true, entryId });
+        await axios.put("/collections/" + collectionId, { entryId, add: true  });
         window.location =
           this.props.location.pathname + "?collectionId=" + collectionId;
       } catch (error) {
