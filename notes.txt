@@ -14,8 +14,10 @@ Questions
 -currently I load all entries to newEntry and filter on search. Is that scalable? Probably not.
 
 
-to make a production build:
-    run in terminal: npm run build
+deploy front end
+    npm run build
+    git push heroku master
+
 
 to serve the run build locally, run in terminal
     npm i -g serve
@@ -24,7 +26,9 @@ to serve the run build locally, run in terminal
 heroku 
     heroku login
 
-to push git repository to heroku  
+to push git repository to heroku
+    git add .
+    git commit -m "message"
     git push heroku master
 
 
