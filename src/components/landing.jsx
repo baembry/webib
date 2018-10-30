@@ -5,8 +5,13 @@ import auth from "../services/authService";
 
 class Landing extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    userId: false
   };
+
+  componentDidMount() {
+    auth.setUser(this);
+  }
 
   handleToggleModal = () => {
     const showModal = this.state.showModal;
@@ -57,6 +62,26 @@ class Landing extends Component {
     }
   };
 
+  renderButtons = () => {
+    if (!this.state.userId) {
+      return (
+        <div>
+          <NavLink className="btn btn-primary" to="/users">
+            Register
+          </NavLink>
+          <NavLink className="btn btn-secondary" to="/auth">
+            Login
+          </NavLink>
+          <div className="btn btn-warning" onClick={this.handleToggleModal}>
+            Continue without Logging in
+          </div>
+          {this.renderModal()}
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
   render() {
     return (
       <div className="landing">
@@ -74,17 +99,7 @@ class Landing extends Component {
             curve.
           </li>
         </ul>
-
-        <NavLink className="btn btn-primary" to="/users">
-          Register
-        </NavLink>
-        <NavLink className="btn btn-secondary" to="/auth">
-          Login
-        </NavLink>
-        <div className="btn btn-warning" onClick={this.handleToggleModal}>
-          Continue without Logging in
-        </div>
-        {this.renderModal()}
+        {this.renderButtons()}
       </div>
     );
   }
