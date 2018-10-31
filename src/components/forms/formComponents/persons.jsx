@@ -22,6 +22,7 @@ const Persons = ({
             <label>{label + " " + personNumber + " First Name"}</label>
             <input
               type="text"
+              title="Will be rendered as entered."
               name={personType + "[" + index + "]firstName"}
               value={
                 data[personType][index] ? data[personType][index].firstName : ""
@@ -36,6 +37,7 @@ const Persons = ({
             <label>{label + " " + personNumber + " Middle Name"}</label>
             <input
               type="text"
+              title="Will be rendered as entered."
               name={personType + "[" + index + "]middleName"}
               value={
                 data[personType][index]
@@ -52,6 +54,7 @@ const Persons = ({
             <label>{label + " " + personNumber + " Last Name"}</label>
             <input
               type="text"
+              title="Will be rendered as entered."
               name={personType + "[" + index + "]lastName"}
               value={
                 data[personType][index] ? data[personType][index].lastName : ""

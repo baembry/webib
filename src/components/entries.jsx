@@ -17,6 +17,15 @@ class Entries extends Display {
               handleCollectionSelect={this.handleCollectionSelect}
               value={this.state.collectionId || "allEntries"}
             />
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  type="text"
+                  className="form-control new-collection"
+                  placeholder="Enter New Collection..."
+                />
+              </form>
+            </div>
             <StyleDropdown
               styles={this.state.myStyles}
               handleStyleSelect={this.handleStyleSelect}
@@ -50,13 +59,6 @@ class Entries extends Display {
                 }
               />
             </div>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="New Collection..."
-              />
-            </form>
           </div>
           <div className="checkboxes">
             <div>

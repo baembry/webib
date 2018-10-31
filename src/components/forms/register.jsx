@@ -60,7 +60,7 @@ class Register extends Component {
             type="password"
             name="password"
             className="form-control"
-            placeholder="Choose a password"
+            placeholder="Password"
             onChange={this.handleChange}
             required={true}
           />
