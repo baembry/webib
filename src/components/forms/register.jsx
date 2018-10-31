@@ -28,7 +28,7 @@ class Register extends Component {
       auth.login(res.headers["x-auth-token"]);
 
       //force refresh
-      window.location = "/entries";
+      window.location = "/entries?collectionId=allEntries";
     } catch (error) {
       this.flashMessage(error.response.data);
     }

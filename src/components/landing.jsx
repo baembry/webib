@@ -46,17 +46,17 @@ class Landing extends Component {
   };
   handleContinue = async e => {
     e.preventDefault();
-    const username = +new Date();
+    const email = +new Date();
     try {
       const res = await axios.post("/users", {
-        username: username.toString(),
+        email: email.toString() + "@fakemail.com",
         password: "12345",
         createdAt: new Date()
       });
       auth.login(res.headers["x-auth-token"]);
 
       //force refresh
-      window.location = "/entries";
+      window.location = "/entries?collectionId=allEntries";
     } catch (error) {
       console.log(error);
     }
