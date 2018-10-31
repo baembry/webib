@@ -150,7 +150,7 @@ class FormClass extends Component {
     } catch (error) {
       console.log("Post to entries error: ", error);
     }
-    if (collectionId !== "undefined") {
+    if (collectionId && collectionId !== "undefined") {
       this.props.history.push("/entries?collectionId=" + collectionId);
     } else {
       this.props.history.push("/entries");

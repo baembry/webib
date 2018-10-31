@@ -65,21 +65,31 @@ function matches(firstObject, secondObject) {
   delete obj1.userId;
   delete obj2.userId;
 
-  console.log(obj1, obj2);
   if (Object.keys(obj1).length === 0) {
     if (Object.keys(obj2).length === 0) {
       return true;
     } else {
+      console.log(`Mismatch. Obj1 has more keys than obj2.`);
+      console.log(obj1);
+      console.log(obj2);
       return false;
     }
   }
   for (let key in obj1) {
     if (!obj2.hasOwnProperty(key)) {
-      //console.log('object 2 does not have key ' + key)
+      console.log(`Mismatch. Obj1 has key ${key}, but obj2 does not.`);
+      console.log(obj1);
+      console.log(obj2);
       return false;
     }
     if (typeof obj1[key] === "string" && obj1[key] !== obj2[key]) {
-      //console.log(`${obj1[key]} does not match ${obj2[key]}`);
+      console.log(
+        `Mismatch. Obj1 contains value ${
+          obj1[key]
+        } at ${key}, but obj2 contains the value ${obj2[key]} at ${[key]}.`
+      );
+      console.log(obj1);
+      console.log(obj2);
       return false;
     }
     if (typeof obj1[key] === "object") {
@@ -89,6 +99,9 @@ function matches(firstObject, secondObject) {
       }
     }
   }
+  console.log("match: ");
+  console.log(obj1);
+  console.log(obj2);
   return true;
 }
 
