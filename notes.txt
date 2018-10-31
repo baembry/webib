@@ -9,6 +9,7 @@ functionality to add
 
 Refactors
 -refactor search algorithms: get innermostValues, return innermostValues.find(value => value ===target)
+-refactor persons;
 
 Questions
 -My post route to entries is returning status 500, but it still works. What't the deal?

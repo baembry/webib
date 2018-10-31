@@ -1,4 +1,4 @@
-const search = (entries, data) => {
+export const search = (entries, data) => {
   const fields = Object.keys(data);
   let filtered = [...entries];
   fields.forEach(field => {
@@ -54,4 +54,69 @@ export const contains = (entry, term) => {
   });
   return result;
 };
-export default search;
+
+function matches(firstObject, secondObject) {
+  let obj1 = { ...firstObject };
+  let obj2 = { ...secondObject };
+
+  //ignore id's
+  delete obj1._id;
+  delete obj2._id;
+  delete obj1.userId;
+  delete obj2.userId;
+
+  console.log(obj1, obj2);
+  if (Object.keys(obj1).length === 0) {
+    if (Object.keys(obj2).length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  for (let key in obj1) {
+    if (!obj2.hasOwnProperty(key)) {
+      //console.log('object 2 does not have key ' + key)
+      return false;
+    }
+    if (typeof obj1[key] === "string" && obj1[key] !== obj2[key]) {
+      //console.log(`${obj1[key]} does not match ${obj2[key]}`);
+      return false;
+    }
+    if (typeof obj1[key] === "object") {
+      let theyMatch = matches(obj1[key], obj2[key]);
+      if (!theyMatch) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function hasMatch(obj, arrayOfObjects) {
+  let searchArray = [...arrayOfObjects];
+  if (searchArray.length === 0) {
+    return false;
+  }
+  let comparisonObject = searchArray[searchArray.length - 1];
+  if (matches(obj, comparisonObject)) {
+    return true;
+  } else {
+    searchArray.pop();
+    return hasMatch(obj, searchArray);
+  }
+}
+
+//this one is not very efficient. Could improve with pop and recursion
+export const eliminateDuplicates = arrayOfObjects => {
+  let clone = [...arrayOfObjects];
+  let result = [];
+  clone.forEach((element, i) => {
+    if (!hasMatch(element, clone.slice(i + 1))) {
+      result.push(element);
+    } else {
+    }
+  });
+  return result;
+};
+
+export default { search, eliminateDuplicates };

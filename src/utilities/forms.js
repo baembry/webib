@@ -32,6 +32,7 @@ export const forms = {
     fieldsToGenerate: [
       "title",
       "volumeTitle",
+      "edition",
       "publisher",
       "year",
       "city",

@@ -62,7 +62,10 @@ class NavBar extends Component {
           </NavLink>
           {this.props.user ? (
             <React.Fragment>
-              <NavLink className="nav-link" to="/entries">
+              <NavLink
+                className="nav-link"
+                to="/entries?collectionId=allEntries"
+              >
                 All Entries
               </NavLink>
               <NavLink className="nav-link" to="/collections" disabled>

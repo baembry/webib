@@ -7,7 +7,7 @@ import TextInput from "./formComponents/textInput";
 class Register extends Component {
   state = {
     data: {
-      username: "",
+      email: "",
       password: "",
       createdAt: null
     },
@@ -45,10 +45,15 @@ class Register extends Component {
     return (
       <div className="">
         <form onSubmit={this.handleSubmit}>
-          <TextInput
-            name="username"
-            handleChange={this.handleChange}
-            value={this.state.username}
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={this.state.data.email}
+            className="form-control"
+            placeholder="Email"
+            onChange={this.handleChange}
+            required={true}
           />
           <label htmlFor="password">Password</label>
           <input
@@ -57,6 +62,7 @@ class Register extends Component {
             className="form-control"
             placeholder="Choose a password"
             onChange={this.handleChange}
+            required={true}
           />
           <button
             type="submit"

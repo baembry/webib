@@ -2,7 +2,7 @@ import { Component } from "react";
 import axios from "axios";
 import auth from "../../services/authService";
 import forms from "../../utilities/forms";
-import search from "../../utilities/search";
+import { search, eliminateDuplicates } from "../../utilities/search";
 
 class FormClass extends Component {
   state = {
@@ -46,8 +46,7 @@ class FormClass extends Component {
   async componentDidMount() {
     auth.setUser(this);
     const { data: entries } = await axios.get("/all-entries");
-    const filtered = [...entries];
-    this.setState({ entries, filtered });
+    this.setState({ entries });
   }
 
   //==================Handlers=============================//
@@ -126,17 +125,8 @@ class FormClass extends Component {
 
   handleFilter = async e => {
     if (this.state.filtered) {
-      const filtered = search(this.state.entries, this.state.data);
-      this.setState({ filtered });
-    }
-  };
-
-  //filter does not work here. don't know why
-  handleDropdownSelectAndFilter = async e => {
-    await this.handleDropdownSelect(e);
-    if (this.state.filtered) {
-      console.log("filtering");
-      const filtered = search(this.state.entries, this.state.data);
+      let filtered = search(this.state.entries, this.state.data);
+      filtered = eliminateDuplicates(filtered);
       this.setState({ filtered });
     }
   };
@@ -153,15 +143,14 @@ class FormClass extends Component {
     const collectionId = this.props.match.params.collectionId;
     try {
       //data is pushed to two different db.collections on server
-      const response = await axios.post("/entries", {
+      await axios.post("/entries", {
         entry: this.state.data,
         collectionId: collectionId
       });
-      console.log("response: ", response);
     } catch (error) {
       console.log("Post to entries error: ", error);
     }
-    if (collectionId !== undefined) {
+    if (collectionId !== "undefined") {
       this.props.history.push("/entries?collectionId=" + collectionId);
     } else {
       this.props.history.push("/entries");

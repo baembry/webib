@@ -2,7 +2,7 @@ import React from "react";
 
 import { getLabel } from "../../../utilities/labels";
 
-const Dropdown = ({ name, values, handleChange, handleFilter, value }) => {
+const Dropdown = ({ name, values, handleChange, value }) => {
   return (
     <div className="form-group dropdown">
       <label htmlFor={name}>{getLabel(name)}</label>
@@ -11,7 +11,6 @@ const Dropdown = ({ name, values, handleChange, handleFilter, value }) => {
         value={value}
         className="form-control"
         onChange={handleChange}
-        onBlur={handleFilter}
       >
         {values.map(value => {
           return (

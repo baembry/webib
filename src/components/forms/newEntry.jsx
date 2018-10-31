@@ -39,7 +39,6 @@ class NewEntry extends FormClass {
               name="entryType"
               values={Object.keys(forms)}
               handleChange={this.handleDropdownSelect}
-              handleFilter={this.handleFilter}
               value={this.state.data.entryType}
             />
 
@@ -82,7 +81,8 @@ class NewEntry extends FormClass {
           {this.state.filtered ? (
             <div className="search-results">
               <div className="search-results__instructions">
-                Click to populate form
+                Existing entries that match your data will appear here. Click
+                one to populate your form.
               </div>
               {this.state.filtered.map((entry, i) => (
                 <Entry

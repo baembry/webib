@@ -135,8 +135,13 @@ export const truncEndPage = pageRange => {
   const startPage = pageArr[0];
   let endPage = pageArr[1];
   let trunc;
-
-  if (startPage > 100 && startPage.slice(-2) > 0 && startPage.slice(-2) < 10) {
+  if (startPage < 100 || startPage % 100 === 0) {
+    trunc = endPage;
+  } else if (
+    startPage > 100 &&
+    startPage.slice(-2) > 0 &&
+    startPage.slice(-2) < 10
+  ) {
     for (let i = 0; i < endPage.length; i++) {
       if (startPage[i] !== endPage[i]) {
         trunc = endPage.slice(i);

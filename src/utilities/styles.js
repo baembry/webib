@@ -275,7 +275,7 @@ const apa6 = {
 apa6.templates.book = [
   "/authors/. ",
   "(/year/). ",
-  "/title/ ",
+  "/title/. ",
   "/city/: ",
   "/publisher/. ",
   "/retrievedFrom/"
@@ -386,7 +386,7 @@ const mla3 = {
 mla3.templates.book = [
   "/authors/. ",
   "/title/. ",
-  "/edition/ ed.",
+  "/edition/ ed. ",
   "Trans. /translators/. ",
   "/city/: ",
   "/publisher/, ",
@@ -409,8 +409,8 @@ mla3.templates.article = [
   '"/title/." ',
   "/journal/ ",
   "/volume/.",
-  "/issue/ ",
-  "(/year/): ",
+  "/issue/",
+  " (/year/): ",
   "/pageRange/. ",
   "/retrievedFrom/"
 ];
