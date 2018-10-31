@@ -10,7 +10,7 @@ class Login extends Register {
       const { data: jwt } = await axios.post("/auth", this.state.data);
       auth.login(jwt);
       //force refresh
-      window.location = "/entries";
+      window.location = "/entries?collectionId=allEntries";
     } catch (error) {
       return error.response ? this.flashMessage(error.response.data) : null;
     }

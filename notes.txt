@@ -33,7 +33,8 @@ to push git repository to heroku
     git commit -m "message"
     git push heroku master
 
-
+push to github
+    git push -u origin master
 
 
 ====================TECHNOLOGIES USED==================

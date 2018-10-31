@@ -292,7 +292,7 @@ apa6.templates.editedVolume = [
 
 apa6.templates.article = [
   "/authors/. ",
-  "(/year/) ",
+  "(/year/). ",
   "/title/. ",
   "/journal/, ",
   "/volume/, ",
