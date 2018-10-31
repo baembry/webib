@@ -26,7 +26,8 @@ class Display extends Component {
     entriesToMove: [],
     searchBase: [],
     useEmDash: false,
-    serializeDates: false
+    serializeDates: false,
+    loading: true
   };
 
   async componentDidMount() {
@@ -52,7 +53,8 @@ class Display extends Component {
     await this.setState({
       entriesToShow,
       collectionId,
-      searchBase: entriesToShow
+      searchBase: entriesToShow,
+      loading: false
     });
   }
 
@@ -303,51 +305,57 @@ class Display extends Component {
     //do not render checkbox if no collections
     const checkboxDisplay =
       this.state.collections.length > 0 ? "inline" : "none";
-    return (
-      <div className="entries">
-        <input
-          type="text"
-          className="form-control search-bar"
-          placeholder="Search..."
-          disabled={this.state.searchBase.length === 0}
-          onChange={this.handleSearch}
-        />
-
-        {/* ============CONDITIONALLY RENDER SHOWENTRY============== */}
-        {this.state.showEntry ? (
-          <ShowEntry
-            entry={this.state.entryToShow}
-            unshowEntry={this.unshowEntry}
-            handleDeleteFromCollection={this.handleDeleteFromCollection}
-            handleDeleteFromEntries={this.handleDeleteFromEntries}
-            collections={this.state.collections}
-            collectionId={this.state.collectionId}
+    if (!this.state.loading) {
+      return (
+        <div className="entries">
+          <input
+            type="text"
+            className="form-control search-bar"
+            placeholder="Search..."
+            disabled={this.state.searchBase.length === 0}
+            onChange={this.handleSearch}
           />
-        ) : null}
-        {/* =====================RENDER ADD TO COLLECTION OR ENTRIES==================== */}
-        {this.state.entriesToShow.map((entry, i, arr) => (
-          <Entry
-            key={i}
-            entry={entry}
-            previousEntry={arr[i - 1]}
-            // nextEntry={arr[i + 1]}
-            style={this.state.activeStyle}
-            onClick={this.handleShow}
-            handleCheck={this.handleCheck}
-            checkboxDisplay={checkboxDisplay}
-            useEmDash={this.state.useEmDash}
-            serializeDates={this.state.serializeDates}
-          />
-        ))}
 
-        {/* =========================CONDITIONALLY RENDER FLASH============== */}
-        {this.state.flash ? (
-          <div className="flash-container">
-            <div className="alert alert-success flash">{this.state.flash}</div>
-          </div>
-        ) : null}
-      </div>
-    );
+          {/* ============CONDITIONALLY RENDER SHOWENTRY============== */}
+          {this.state.showEntry ? (
+            <ShowEntry
+              entry={this.state.entryToShow}
+              unshowEntry={this.unshowEntry}
+              handleDeleteFromCollection={this.handleDeleteFromCollection}
+              handleDeleteFromEntries={this.handleDeleteFromEntries}
+              collections={this.state.collections}
+              collectionId={this.state.collectionId}
+            />
+          ) : null}
+          {/* =====================RENDER ADD TO COLLECTION OR ENTRIES==================== */}
+          {this.state.entriesToShow.map((entry, i, arr) => (
+            <Entry
+              key={i}
+              entry={entry}
+              previousEntry={arr[i - 1]}
+              // nextEntry={arr[i + 1]}
+              style={this.state.activeStyle}
+              onClick={this.handleShow}
+              handleCheck={this.handleCheck}
+              checkboxDisplay={checkboxDisplay}
+              useEmDash={this.state.useEmDash}
+              serializeDates={this.state.serializeDates}
+            />
+          ))}
+
+          {/* =========================CONDITIONALLY RENDER FLASH============== */}
+          {this.state.flash ? (
+            <div className="flash-container">
+              <div className="alert alert-success flash">
+                {this.state.flash}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      );
+    } else {
+      return <div className="entries">Loading...</div>;
+    }
   };
 }
 
