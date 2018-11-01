@@ -107,11 +107,10 @@ function hasMatch(obj, arrayOfObjects) {
   if (searchArray.length === 0) {
     return false;
   }
-  let comparisonObject = searchArray[searchArray.length - 1];
+  let comparisonObject = searchArray.pop();
   if (matches(obj, comparisonObject)) {
     return true;
   } else {
-    searchArray.pop();
     return hasMatch(obj, searchArray);
   }
 }

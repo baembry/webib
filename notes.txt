@@ -1,9 +1,7 @@
 functionality to add
 -Suffixes like Jr. (see MLA 187)
 -citing introduction, preface, foreword, afterword (MLA 194); the difficulty here is that the intro and book have different authors; probably need a separate entry Type for this.
--apa6 styles change is mysteriously affecting standardStyles at styles.js 256; looks like a ES6 problem.
 
--alerts for errors?
 -add captia to register/continue options
 -add email api: send feedback form. recover lost password
 
@@ -12,8 +10,9 @@ Refactors
 -refactor persons;
 
 Questions
--My post route to entries is returning status 500, but it still works. What't the deal?
 -currently I load all entries to newEntry and filter on search. Is that scalable? Probably not.
+-apa6 styles change is mysteriously affecting standardStyles at styles.js 256; looks like a ES6 problem.
+
 
 
 deploy front end

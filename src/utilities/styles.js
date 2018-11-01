@@ -33,7 +33,7 @@ const standardStyling = {
 const chicago16bib = {
   _id: "chicago16bib",
   label: "Chicago 16th ed. Bibliography",
-  primaryPersonFormatter: "FirstLastFirstLast",
+  primaryPersonFormatter: "LastFirstFirstLast",
   secondaryPersonFormatter: "FirstLastFirstLast",
   firstNameFormatter: "getFirstName",
   middleNameFormatter: "getMiddleName",

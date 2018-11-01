@@ -3,7 +3,7 @@ import React from "react";
 const StyleDropdown = ({ handleStyleSelect, styles, disabled }) => {
   return (
     <div className="style-dropdown-container">
-      <label htmlFor="style">Select a bibliography style</label>
+      <label htmlFor="style">Select a Bibliography Style</label>
       <select
         id="style"
         name="style"
