@@ -8,7 +8,7 @@ const CollectionsDropdown = ({
   return (
     <React.Fragment>
       <div className="collections-dropdown-container">
-        <label htmlFor="collections">Select a collection</label>
+        <label htmlFor="collections">Your Collections</label>
         <select
           name="collections"
           className="form-control dropdown"

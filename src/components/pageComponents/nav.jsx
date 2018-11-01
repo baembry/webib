@@ -62,6 +62,53 @@ class NavBar extends Component {
           </NavLink>
           {this.props.user ? (
             <React.Fragment>
+              <div class="nav-item dropdown">
+                <a
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Instructions
+                </a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-item">
+                    A collection is a list of bibliographic entries. To create a
+                    new collection, enter the collection name in "Create New
+                    Collection."
+                  </div>
+                  <div class="dropdown-divider" />
+                  <div class="dropdown-item">
+                    You can now move between collections (or all entries) using
+                    the "Your Collections" dropdown.
+                  </div>
+                  <div class="dropdown-divider" />
+                  <div class="dropdown-item">
+                    From within a collection, you can add an entry to the
+                    collection by clicking "Create Entry and Add to Collection."
+                  </div>
+                  <div class="dropdown-divider" />
+                  <div class="dropdown-item">
+                    If you are in All Entries, you can create an entry by
+                    clicking "Create Entry."
+                  </div>
+                  <div class="dropdown-divider" />
+                  <div class="dropdown-item">
+                    You can add an existing entry to an existing collection by
+                    checking the box next to the entry and clicking "Add
+                    Selected Entries To..."
+                  </div>
+                  <div class="dropdown-divider" />
+                  <div class="dropdown-item">
+                    Choose a bibliography style with "Select a Bibliography
+                    Style," or create a new style by going to "Your Styles" in
+                    the navigation bar.
+                  </div>
+                  <div class="dropdown-divider" />
+                </div>
+              </div>
               <NavLink
                 className="nav-link"
                 to="/entries?collectionId=allEntries"
@@ -72,8 +119,9 @@ class NavBar extends Component {
                 Collections
               </NavLink>
               <NavLink className="nav-link" to="/styles">
-                My Styles
+                Your Styles
               </NavLink>
+
               <button className="btn btn-primary" onClick={auth.logout}>
                 Logout
               </button>

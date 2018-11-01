@@ -6,7 +6,7 @@ const AddToCollection = ({ collections, handleAddToCollection, disabled }) => {
       <button
         id="btnGroupDrop1"
         type="button"
-        className="btn btn-outline-primary dropdown-toggle"
+        className="btn btn-outline-primary dropdown-toggle add-to-collection"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"

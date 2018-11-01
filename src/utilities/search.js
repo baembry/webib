@@ -99,9 +99,6 @@ function matches(firstObject, secondObject) {
       }
     }
   }
-  console.log("match: ");
-  console.log(obj1);
-  console.log(obj2);
   return true;
 }
 

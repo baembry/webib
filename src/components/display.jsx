@@ -258,11 +258,11 @@ class Display extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     try {
-      await axios.post("/collections", {
+      let { data: newCollection } = await axios.post("/collections", {
         userId: this.state.userId,
         name: e.currentTarget.elements[0].value
       });
-      window.location = "/entries";
+      window.location = "/entries?collectionId=" + newCollection._id;
     } catch (error) {
       this.flashMessage("Error making collection: " + error.message);
     }

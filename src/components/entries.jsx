@@ -19,10 +19,11 @@ class Entries extends Display {
             />
             <div>
               <form onSubmit={this.handleSubmit}>
+                <label htmlFor="new-collection">Create New Collection</label>
                 <input
                   type="text"
                   className="form-control new-collection"
-                  placeholder="Enter New Collection..."
+                  placeholder="Enter Collection Name..."
                 />
               </form>
             </div>
@@ -37,7 +38,7 @@ class Entries extends Display {
                 <Link
                   title="Create a new entry and add it to present collection"
                   to={"/collections/" + this.state.collectionId + "/new-entry"}
-                  className="btn btn-outline-primary no-width"
+                  className="btn btn-outline-primary create-entry"
                 >
                   Create Entry and Add to Collection
                 </Link>
@@ -45,7 +46,7 @@ class Entries extends Display {
                 <Link
                   title="Create a new entry"
                   to="/entries/new"
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-primary create-entry"
                 >
                   Create Entry
                 </Link>
