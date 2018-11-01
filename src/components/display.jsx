@@ -354,7 +354,7 @@ class Display extends Component {
         </div>
       );
     } else {
-      return <div className="entries">Loading...</div>;
+      return <div class="loader" />;
     }
   };
 }
