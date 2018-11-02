@@ -6,6 +6,7 @@ functionality to add
 -add email api: send feedback form. recover lost password
 
 Refactors
+-sort entries on backend; this will improve performance on the front end;
 -refactor search algorithms: get innermostValues, return innermostValues.find(value => value ===target)
 -refactor persons;
 
