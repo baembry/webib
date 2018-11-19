@@ -43,5 +43,5 @@ mongodb, mongoose
 React
 joi for data validation
 bcryptjs for password encryption
-Sentry for error loging
+Sentry for error logging
 git for version control

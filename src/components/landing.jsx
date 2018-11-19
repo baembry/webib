@@ -44,6 +44,7 @@ class Landing extends Component {
     }
     return modal;
   };
+
   handleContinue = async e => {
     e.preventDefault();
     const email = +new Date();
@@ -82,24 +83,21 @@ class Landing extends Component {
       return null;
     }
   };
+
   render() {
     return (
-      <div className="landing">
-        <h1>Welcome to Webib!</h1>
-        <h3>The world's simplest bibliography manager.</h3>
+      <div className="landing-container">
+        <div className="landing">
+          <h1>Welcome to Webib!</h1>
+          <h3>The world's simplest bibliography manager.</h3>
 
-        <ul>
-          <li>Cloud-based: never worry about conflicting data.</li>
-          <li>
-            Collaborative: if a citation has already been entered, just click to
-            add it to your collections.
-          </li>
-          <li>
-            Super simple: self-explanatory interface; no tutorials or learning
-            curve.
-          </li>
-        </ul>
-        {this.renderButtons()}
+          <ul>
+            <li>Cloud-based: never worry about conflicting data.</li>
+            <li>Collaborative: use other people's references.</li>
+            <li>Super simple: no tutorials or learning curve.</li>
+          </ul>
+          {this.renderButtons()}
+        </div>
       </div>
     );
   }

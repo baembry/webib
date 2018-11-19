@@ -30,19 +30,37 @@ body {
   white-space: pre-wrap;
 }
 /* ===================LANDING PAGE============================= */
+.landing-container {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(
+      rgb(227, 242, 253, 0.75),
+      rgb(227, 242, 253, 0.75)
+    ),
+    url("./assets/susan-yin-647448-unsplash.jpg") center;
+  background-size: cover;
+}
+
 .landing {
   margin: auto;
   padding-top: 13vh;
   width: 78%;
   text-align: center;
   position: relative;
+  font-weight: 900;
 }
 
 .landing ul {
+  list-style: none;
   width: 78%;
   margin: 2rem auto;
+  padding: 0;
   text-align: left;
   font-size: 1.27rem;
+}
+
+.landing ul li {
+  text-align: center;
 }
 
 .landing .exhortation {
