@@ -9,8 +9,7 @@ class Landing extends Component {
   //flashMessage is passed in props
   state = {
     showModal: false,
-    userId: false,
-    working: false
+    userId: false
   };
 
   componentDidMount() {
@@ -52,6 +51,7 @@ class Landing extends Component {
 
   handleContinue = async e => {
     e.preventDefault();
+    this.props.toggleLoading();
     const email = +new Date();
     try {
       this.handleToggleModal();
@@ -64,10 +64,11 @@ class Landing extends Component {
       auth.login(res.headers["x-auth-token"]);
 
       //force refresh
+      this.props.toggleLoading();
       window.location = "/entries?collectionId=allEntries";
     } catch (error) {
       console.log("The error is: ", error);
-      this.setState({ working: false });
+      this.props.toggleLoading();
       this.props.flashMessage(error.message, "danger", 1500); //executed in app.js
     }
   };
@@ -106,7 +107,6 @@ class Landing extends Component {
             <li>Super simple: no tutorials or learning curve.</li>
           </ul>
           {this.renderButtons()}
-          {this.state.working ? <div className="loader" /> : null}
         </div>
       </div>
     );
