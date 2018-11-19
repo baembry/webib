@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+
+import FlashMessage from "./flashMessage";
+
 import axios from "axios";
 import auth from "../../services/authService";
+
+import { flashMessage } from "../../utilities/flash";
 
 class NavBar extends Component {
   state = {
@@ -50,6 +55,7 @@ class NavBar extends Component {
       //force refresh
       window.location = "/entries?collectionId=allEntries";
     } catch (error) {
+      this.flashMessage("Error: " + error.message, "danger", 1500);
       console.log(error);
     }
   };
@@ -134,12 +140,13 @@ class NavBar extends Component {
               <NavLink className="nav-link" to="/auth">
                 Login
               </NavLink>
-              <div
+              {/* deprecating this option */}
+              {/* <div
                 className="nav-link clickable"
                 onClick={this.handleToggleModal}
               >
                 Continue without Logging in
-              </div>
+              </div> */}
             </React.Fragment>
           )}
         </nav>

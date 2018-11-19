@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import FlashMessage from "./pageComponents/flashMessage";
 import axios from "axios";
 import auth from "../services/authService";
+import { flashMessage, logThisState } from "../utilities/flash";
 
 class Landing extends Component {
+  //flashMessage is passed in props
   state = {
     showModal: false,
-    userId: false
+    userId: false,
+    working: false
   };
 
   componentDidMount() {
@@ -17,6 +21,7 @@ class Landing extends Component {
     const showModal = this.state.showModal;
     this.setState({ showModal: !showModal });
   };
+
   renderModal = () => {
     var modal = null;
     if (this.state.showModal) {
@@ -49,6 +54,8 @@ class Landing extends Component {
     e.preventDefault();
     const email = +new Date();
     try {
+      this.handleToggleModal();
+      this.setState({ working: true });
       const res = await axios.post("/users", {
         email: email.toString() + "@fakemail.com",
         password: "12345",
@@ -59,7 +66,9 @@ class Landing extends Component {
       //force refresh
       window.location = "/entries?collectionId=allEntries";
     } catch (error) {
-      console.log(error);
+      console.log("The error is: ", error);
+      this.setState({ working: false });
+      this.props.flashMessage(error.message, "danger", 1500); //executed in app.js
     }
   };
 
@@ -97,6 +106,7 @@ class Landing extends Component {
             <li>Super simple: no tutorials or learning curve.</li>
           </ul>
           {this.renderButtons()}
+          {this.state.working ? <div className="loader" /> : null}
         </div>
       </div>
     );

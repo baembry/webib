@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import auth from "../../services/authService";
-import TextInput from "./formComponents/textInput";
 
 class Register extends Component {
   state = {
@@ -11,8 +10,7 @@ class Register extends Component {
       password: "",
       createdAt: null
     },
-    errors: "",
-    flash: false
+    errors: ""
   };
 
   handleChange = e => {
@@ -23,6 +21,7 @@ class Register extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    this.props.toggleLoading();
     try {
       const res = await axios.post("/users", this.state.data);
       auth.login(res.headers["x-auth-token"]);
@@ -30,15 +29,9 @@ class Register extends Component {
       //force refresh
       window.location = "/entries?collectionId=allEntries";
     } catch (error) {
-      this.flashMessage(error.response.data);
+      this.props.flashMessage(error.message, "danger", 1500);
     }
-  };
-
-  flashMessage = async message => {
-    await this.setState({ flash: message });
-    setTimeout(() => {
-      this.setState({ flash: false });
-    }, 1700);
+    this.props.toggleLoading();
   };
 
   renderForm = () => {
@@ -72,11 +65,6 @@ class Register extends Component {
             Submit
           </button>
         </form>
-        {this.state.flash ? (
-          <div className="flash-container">
-            <div className="alert alert-danger flash">{this.state.flash}</div>
-          </div>
-        ) : null}
       </div>
     );
   };

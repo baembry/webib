@@ -140,6 +140,7 @@ class FormClass extends Component {
   //******************************************************** */
   handleSubmit = async e => {
     e.preventDefault();
+    this.props.toggleLoading();
     const collectionId = this.props.match.params.collectionId;
     try {
       //data is pushed to two different db.collections on server
@@ -149,7 +150,9 @@ class FormClass extends Component {
       });
     } catch (error) {
       console.log("Post to entries error: ", error);
+      this.props.flashMessage(error.message, "danger", 1500);
     }
+    this.props.toggleLoading();
     if (collectionId && collectionId !== "undefined") {
       this.props.history.push("/entries?collectionId=" + collectionId);
     } else {

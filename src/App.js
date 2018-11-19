@@ -15,6 +15,10 @@ import Landing from "./components/landing";
 import NewStyle from "./components/forms/newStyle";
 import Styles from "./components/styles";
 import ErrorBoundary from "./components/errorBoundary";
+import FlashMessage from "./components/pageComponents/flashMessage";
+import Loader from "./components/pageComponents/loader";
+
+import { flashMessage } from "./utilities/flash";
 
 import auth from "./services/authService";
 import axios from "axios";
@@ -28,11 +32,21 @@ axios.interceptors.response.use(null, error => {
 
 class App extends Component {
   state = {
-    userId: null
+    userId: null,
+    flashData: { showFlash: false, message: "", alertClass: "" },
+    loading: true
   };
+
   componentDidMount() {
     auth.setUser(this);
+    this.setState({ loading: false });
   }
+
+  flashMessage = flashMessage.bind(this);
+  toggleLoading = () => {
+    const loading = this.state.loading;
+    this.setState({ loading: !loading });
+  };
 
   render() {
     return (
@@ -40,21 +54,81 @@ class App extends Component {
         <ErrorBoundary>
           <NavBar user={this.state.userId} />
           <Switch>
-            <Route path="/entries/:entryId/edit" component={Edit} />
-            <Route path="/entries/new" exact component={NewEntry} />
-            <ProtectedRoute path="/entries" component={Entries} />
-            <Route
+            <ProtectedRoute
+              path="/entries/:entryId/edit"
+              component={Edit}
+              flashMessage={this.flashMessage}
+              toggleLoading={this.toggleLoading}
+            />
+            <ProtectedRoute
+              path="/entries/new"
+              component={NewEntry}
+              flashMessage={this.flashMessage}
+              toggleLoading={this.toggleLoading}
+            />
+            <ProtectedRoute
+              path="/entries"
+              component={Entries}
+              flashMessage={this.flashMessage}
+              toggleLoading={this.toggleLoading}
+            />
+            <ProtectedRoute
               path="/collections/:collectionId/new-entry"
               component={NewEntry}
+              flashMessage={this.flashMessage}
+              toggleLoading={this.toggleLoading}
             />
-            <ProtectedRoute path="/collections" exact component={Collections} />
-            <ProtectedRoute path="/styles/:id/edit" component={NewStyle} />
-            <ProtectedRoute path="/styles/new" component={NewStyle} />
+            <ProtectedRoute
+              path="/collections"
+              exact
+              component={Collections}
+              flashMessage={this.flashMessage}
+              toggleLoading={this.toggleLoading}
+            />
+            <ProtectedRoute
+              path="/styles/:id/edit"
+              component={NewStyle}
+              flashMessage={this.flashMessage}
+              toggleLoading={this.toggleLoading}
+            />
+            <ProtectedRoute
+              path="/styles/new"
+              component={NewStyle}
+              flashMessage={this.flashMessage}
+              toggleLoading={this.toggleLoading}
+            />
             <ProtectedRoute path="/styles" component={Styles} />
-            <Route path="/users" component={Register} />
-            <Route path="/auth" component={Login} />
-            <Route path="/" component={Landing} />
+            />
+            <Route
+              path="/users"
+              render={() => (
+                <Register
+                  flashMessage={this.flashMessage}
+                  toggleLoading={this.toggleLoading}
+                />
+              )}
+            />
+            <Route
+              path="/auth"
+              render={() => (
+                <Login
+                  flashMessage={this.flashMessage}
+                  toggleLoading={this.toggleLoading}
+                />
+              )}
+            />
+            <Route
+              path="/"
+              render={() => (
+                <Landing
+                  flashMessage={this.flashMessage}
+                  toggleLoading={this.toggleLoading}
+                />
+              )}
+            />
           </Switch>
+          <FlashMessage flashData={this.state.flashData} />
+          <Loader loading={this.state.loading} />
         </ErrorBoundary>
       </div>
     );

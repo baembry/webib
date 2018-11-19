@@ -6,14 +6,16 @@ import auth from "../../services/authService";
 class Login extends Register {
   handleSubmit = async e => {
     e.preventDefault();
+    this.props.toggleLoading();
     try {
       const { data: jwt } = await axios.post("/auth", this.state.data);
       auth.login(jwt);
       //force refresh
       window.location = "/entries?collectionId=allEntries";
     } catch (error) {
-      return error.response ? this.flashMessage(error.response.data) : null;
+      this.props.flashMessage(error.message, "danger", 1500);
     }
+    this.props.toggleLoading();
   };
   render() {
     return (

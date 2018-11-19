@@ -31,8 +31,7 @@ const blankStyle = {
     oneVolumeOfMultivolumeWorkWithAuthor: [],
     oneVolumeOfMultivolumeWorkWithEditor: []
   },
-  styles: {},
-  flash: ""
+  styles: {}
 };
 
 class NewStyle extends Component {
@@ -133,15 +132,9 @@ class NewStyle extends Component {
     return templates;
   };
 
-  flashMessage = async message => {
-    await this.setState({ flash: message });
-    setTimeout(() => {
-      this.setState({ flash: false });
-    }, 2000);
-  };
-
   handleSubmit = async e => {
     e.preventDefault();
+    this.props.toggleLoading();
     let match = this.state.myStyles.find(
       style => style.label === this.state.newStyle.label
     );
@@ -152,16 +145,19 @@ class NewStyle extends Component {
     } else {
       //check for duplicate names
       if (match) {
-        this.flashMessage(
+        this.props.flashMessage(
           `You already have a style with the name ${
             this.state.newStyle.label
-          }. Please change the name.`
+          }. Please change the name.`,
+          "warning",
+          1500
         );
         return;
       }
       delete newStyle._id;
       await axios.post("/styles", newStyle);
     }
+    this.props.toggleLoading();
     this.props.history.push("/entries");
   };
 
@@ -521,9 +517,6 @@ class NewStyle extends Component {
             Submit
           </button>
         </form>
-        {this.state.flash ? (
-          <div className="alert alert-danger flash">{this.state.flash}</div>
-        ) : null}
       </div>
     );
   }

@@ -34,28 +34,33 @@ class Display extends Component {
     await auth.setUser(this);
 
     const { collectionId } = parse(this.props.location.search);
-    const { data: entries } = await axios.get("/entries");
-    const { data: collections } = await axios.get("/collections");
-    let { data: myStyles } = await axios.get("/styles");
-    myStyles = myStyles.concat(styles);
-    await this.setState({ entries, collections, myStyles });
+    try {
+      const { data: entries } = await axios.get("/entries");
+      const { data: collections } = await axios.get("/collections");
+      let { data: myStyles } = await axios.get("/styles");
+      myStyles = myStyles.concat(styles);
+      await this.setState({ entries, collections, myStyles });
 
-    const activeStyle = new Style(myStyles[0]);
-    await this.setState({ activeStyle });
+      const activeStyle = new Style(myStyles[0]);
+      await this.setState({ activeStyle });
 
-    if (collectionId && collectionId !== "allEntries") {
-      var entriesToShow = this.serializeDates(
-        this.sortEntries(this.getEntriesFromCollection(collectionId))
-      );
-    } else {
-      entriesToShow = this.serializeDates(this.sortEntries([...entries]));
+      if (collectionId && collectionId !== "allEntries") {
+        var entriesToShow = this.serializeDates(
+          this.sortEntries(this.getEntriesFromCollection(collectionId))
+        );
+      } else {
+        entriesToShow = this.serializeDates(this.sortEntries([...entries]));
+      }
+      await this.setState({
+        entriesToShow,
+        collectionId,
+        searchBase: entriesToShow,
+        loading: false
+      });
+    } catch (error) {
+      this.props.flashMessage(error.message, "danger", 1500);
+      this.setState({ loading: false });
     }
-    await this.setState({
-      entriesToShow,
-      collectionId,
-      searchBase: entriesToShow,
-      loading: false
-    });
   }
 
   getEntriesFromCollection = id => {
@@ -136,6 +141,8 @@ class Display extends Component {
 
   handleAddToCollection = async collectionId => {
     const entriesToMove = [...this.state.entriesToMove];
+    let procede = true;
+    this.props.toggleLoading();
     //loop is required for await because forEach invokes a function
     for (let entryId of entriesToMove) {
       try {
@@ -146,10 +153,16 @@ class Display extends Component {
         });
         console.log(response);
       } catch (error) {
-        await this.flashMessage("Error updating collection: ", error.message);
+        await this.props.flashMessage(
+          "Error updating collection: " + error.message,
+          "danger",
+          1500
+        );
+        procede = false;
       }
     }
-    if (!this.state.flash) {
+    this.props.toggleLoading();
+    if (procede) {
       window.location =
         this.props.location.pathname + "?collectionId=" + collectionId;
     }
@@ -176,9 +189,13 @@ class Display extends Component {
         entryId: id,
         add: false //this tells the route to delete instead of adding
       });
-      this.flashMessage("Entry Deleted from Collection");
+      this.props.flashMessage("Entry Deleted from Collection", "success", 1500);
     } catch (error) {
-      this.flashMessage("Error deleting from collection " + error.message);
+      this.props.flashMessage(
+        "Error deleting from collection " + error.message,
+        "danger",
+        1500
+      );
       this.setState(originalState);
     }
     this.setState({ showEntry: false });
@@ -207,11 +224,13 @@ class Display extends Component {
     //update db
     try {
       await axios.delete("/entries/" + id);
-      await this.flashMessage("Entry Deleted");
+      await this.props.flashMessage("Entry Deleted", "success", 1500);
       this.setState({ showEntry: false });
     } catch (error) {
-      await this.flashMessage(
-        "There was a problem deleting the entry: " + error.message
+      await this.props.flashMessage(
+        "There was a problem deleting the entry: " + error.message,
+        "success",
+        1500
       );
       this.setState(originalState);
     }
@@ -225,13 +244,6 @@ class Display extends Component {
       filtered = filtered.filter(entry => contains(entry, term));
     });
     this.setState({ entriesToShow: filtered });
-  };
-
-  flashMessage = async message => {
-    await this.setState({ flash: message });
-    setTimeout(() => {
-      this.setState({ flash: false });
-    }, 1000);
   };
 
   handleCollectionSelect = e => {
@@ -257,15 +269,22 @@ class Display extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    this.props.toggleLoading();
+    const collectionName = e.currentTarget.elements[0].value;
     try {
       let { data: newCollection } = await axios.post("/collections", {
         userId: this.state.userId,
-        name: e.currentTarget.elements[0].value
+        name: collectionName
       });
       window.location = "/entries?collectionId=" + newCollection._id;
     } catch (error) {
-      this.flashMessage("Error making collection: " + error.message);
+      this.props.flashMessage(
+        "Error making collection: " + error.message,
+        "danger",
+        1500
+      );
     }
+    this.props.toggleLoading();
   };
 
   handleStyleSelect = async e => {
@@ -342,19 +361,10 @@ class Display extends Component {
               serializeDates={this.state.serializeDates}
             />
           ))}
-
-          {/* =========================CONDITIONALLY RENDER FLASH============== */}
-          {this.state.flash ? (
-            <div className="flash-container">
-              <div className="alert alert-success flash">
-                {this.state.flash}
-              </div>
-            </div>
-          ) : null}
         </div>
       );
     } else {
-      return <div class="loader" />;
+      return <div className="loader" />;
     }
   };
 }

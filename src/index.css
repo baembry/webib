@@ -337,6 +337,9 @@ input:invalid {
   height: 120px;
   margin: auto;
   animation: spin 2s linear infinite;
+  position: fixed;
+  top: 28vh;
+  right: 45vw;
 }
 
 @keyframes spin {

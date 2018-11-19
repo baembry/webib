@@ -15,6 +15,7 @@ class Collections extends Component {
   }
 
   handleDelete = async (collection, index) => {
+    this.props.toggleLoading();
     let confirmed = window.confirm(
       `Are you sure you want to delete ${collection.name}?`
     );
@@ -33,6 +34,7 @@ class Collections extends Component {
         this.setState({ data: originalData });
       }
     }
+    this.props.toggleLoading();
   };
 
   handleShow = id => {
