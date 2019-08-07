@@ -37,7 +37,7 @@ body {
       rgb(227, 242, 253, 0.75),
       rgb(227, 242, 253, 0.75)
     ),
-    url("./assets/susan-yin-647448-unsplash.jpg") center;
+    url('./assets/susan-yin-647448-unsplash.jpg') center;
   background-size: cover;
 }
 
@@ -328,6 +328,7 @@ input:invalid {
 .my-styles .new-style {
   margin: 2rem 0;
 }
+
 /* ===LOADER FROM https://www.w3schools.com/howto/howto_css_loader.asp ====== */
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */

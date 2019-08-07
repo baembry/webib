@@ -55,7 +55,7 @@ export const forms = {
     counters: { authors: 0, editors: 1, translators: 0 }
   },
   multivolumeWorkWithAuthor: {
-    requiredFields: ["seriesTitle"],
+    requiredFields: ["title"],
     fieldsToGenerate: [
       "title",
       "edition",
@@ -69,7 +69,7 @@ export const forms = {
     counters: { authors: 1, editors: 0, translators: 0 }
   },
   multivolumeWorkWithEditor: {
-    requiredFields: ["seriesTitle"],
+    requiredFields: ["title"],
     fieldsToGenerate: [
       "title",
       "edition",
