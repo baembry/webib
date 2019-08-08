@@ -23,7 +23,7 @@ const TextInput = ({ name, handleChange, handleFilter, value, required }) => {
         className="form-control"
         placeholder={label}
         onChange={handleChange}
-        onBlur={handleFilter}
+        onBlur={name === 'title' ? handleFilter : null}
         required={required}
       />
     </div>

@@ -11,14 +11,10 @@ const Persons = ({
   data,
   requiredFields,
 }) => {
-  console.log('data', data);
   const types = Object.keys(counters);
   return types.map(personType => {
     const label = getLabel(personType);
     const persons = [...Array(counters[personType])].map((_, index) => {
-      console.log(
-        data[personType][index] ? data[personType][index].firstName : ''
-      );
       const personNumber = index + 1;
       return (
         <React.Fragment key={index}>
@@ -34,7 +30,6 @@ const Persons = ({
               }
               className="form-control"
               placeholder={label + ' ' + personNumber + ' First Name'}
-              onBlur={handleFilter}
               onChange={handleChange}
             />
           </div>
@@ -51,7 +46,6 @@ const Persons = ({
               }
               className="form-control"
               placeholder={label + ' ' + personNumber + ' Middle Name'}
-              onBlur={handleFilter}
               onChange={handleChange}
             />
           </div>

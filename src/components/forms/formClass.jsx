@@ -2,11 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import auth from '../../services/authService';
 import forms from '../../utilities/forms';
-import {
-  search,
-  eliminateDuplicates,
-  handleSearch,
-} from '../../utilities/search';
+import { handleSearch } from '../../utilities/search';
 
 class FormClass extends Component {
   state = {
