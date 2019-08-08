@@ -1,16 +1,16 @@
-import { Component } from "react";
-import axios from "axios";
-import auth from "../../services/authService";
-import forms from "../../utilities/forms";
-import { search, eliminateDuplicates } from "../../utilities/search";
+import { Component } from 'react';
+import axios from 'axios';
+import auth from '../../services/authService';
+import forms from '../../utilities/forms';
+import { search, eliminateDuplicates } from '../../utilities/search';
 
 class FormClass extends Component {
   state = {
     data: {
-      entryType: "book",
+      entryType: 'book',
       authors: [],
       editors: [],
-      translators: []
+      translators: [],
     },
     collectionId: 123,
     fieldsToGenerate: [],
@@ -20,32 +20,33 @@ class FormClass extends Component {
     counters: {
       authors: 0,
       editors: 0,
-      translators: 0
+      translators: 0,
     },
     entries: [],
-    filtered: []
+    filtered: [],
   };
 
   constructor(props) {
     super(props);
     this.state.data = {
-      entryType: "book",
+      entryType: 'book',
       authors: [],
       editors: [],
-      translators: []
+      translators: [],
     };
     this.state.collectionId = this.props.match.params.collectionId;
     this.state.fieldsToGenerate = forms.book.fieldsToGenerate;
     this.state.requiredFields = forms.book.requiredFields;
     this.state.counters = forms.book.counters;
     //the following sets values for input fields so they can be controlled
+    let dataClone = { ...this.state.data };
     this.state.fieldsToGenerate.forEach(field => {
-      this.state.data[field] = "";
+      this.state.data[field] = '';
     });
   }
   async componentDidMount() {
     auth.setUser(this);
-    const { data: entries } = await axios.get("/all-entries");
+    const { data: entries } = await axios.get('/all-entries');
     this.setState({ entries });
   }
 
@@ -57,7 +58,7 @@ class FormClass extends Component {
     this.setState({ counters });
     //this is so the new component is controlled
     let data = { ...this.state.data };
-    data[target].push({ firstName: "", lastName: "" });
+    data[target].push({ firstName: '', lastName: '' });
     this.setState({ data });
   };
 
@@ -83,14 +84,14 @@ class FormClass extends Component {
 
   handleChange = async e => {
     let targetName = e.currentTarget.name;
-    if (targetName.includes("[")) {
+    if (targetName.includes('[')) {
       //handle change for arrays of data; event target name will be of form 'key[i]key'
-      let key1 = targetName.slice(0, targetName.indexOf("["));
+      let key1 = targetName.slice(0, targetName.indexOf('['));
       let index = targetName.slice(
-        targetName.indexOf("[") + 1,
-        targetName.indexOf("]")
+        targetName.indexOf('[') + 1,
+        targetName.indexOf(']')
       );
-      let key2 = targetName.slice(targetName.indexOf("]") + 1);
+      let key2 = targetName.slice(targetName.indexOf(']') + 1);
       let data = { ...this.state.data };
       //preserve the data already in data[key1][index], or else give it an initial value to be modified
       data[key1][index] = data[key1][index] || {};
@@ -144,19 +145,19 @@ class FormClass extends Component {
     const collectionId = this.props.match.params.collectionId;
     try {
       //data is pushed to two different db.collections on server
-      await axios.post("/entries", {
+      await axios.post('/entries', {
         entry: this.state.data,
-        collectionId: collectionId
+        collectionId: collectionId,
       });
     } catch (error) {
-      console.log("Post to entries error: ", error);
-      this.props.flashMessage(error.message, "danger", 1500);
+      console.log('Post to entries error: ', error);
+      this.props.flashMessage(error.message, 'danger', 1500);
     }
     this.props.toggleLoading();
-    if (collectionId && collectionId !== "undefined") {
-      this.props.history.push("/entries?collectionId=" + collectionId);
+    if (collectionId && collectionId !== 'undefined') {
+      this.props.history.push('/entries?collectionId=' + collectionId);
     } else {
-      this.props.history.push("/entries");
+      this.props.history.push('/entries');
     }
   };
   render() {

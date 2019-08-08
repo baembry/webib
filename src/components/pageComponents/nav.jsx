@@ -1,16 +1,12 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import FlashMessage from "./flashMessage";
-
-import axios from "axios";
-import auth from "../../services/authService";
-
-import { flashMessage } from "../../utilities/flash";
+import axios from 'axios';
+import auth from '../../services/authService';
 
 class NavBar extends Component {
   state = {
-    showModal: false
+    showModal: false,
   };
 
   handleToggleModal = () => {
@@ -45,17 +41,17 @@ class NavBar extends Component {
     e.preventDefault();
     const email = +new Date();
     try {
-      const res = await axios.post("/users", {
-        email: email.toString() + "@fakemail.com",
-        password: "12345",
-        createdAt: new Date()
+      const res = await axios.post('/users', {
+        email: email.toString() + '@fakemail.com',
+        password: '12345',
+        createdAt: new Date(),
       });
-      auth.login(res.headers["x-auth-token"]);
+      auth.login(res.headers['x-auth-token']);
 
       //force refresh
-      window.location = "/entries?collectionId=allEntries";
+      window.location = '/entries?collectionId=allEntries';
     } catch (error) {
-      this.flashMessage("Error: " + error.message, "danger", 1500);
+      this.flashMessage('Error: ' + error.message, 'danger', 1500);
       console.log(error);
     }
   };
@@ -69,7 +65,7 @@ class NavBar extends Component {
           {this.props.user ? (
             <React.Fragment>
               <div className="nav-item dropdown">
-                <a
+                <span
                   className="dropdown-toggle"
                   data-toggle="dropdown"
                   href="#"
@@ -78,7 +74,7 @@ class NavBar extends Component {
                   aria-expanded="false"
                 >
                   Instructions
-                </a>
+                </span>
                 <div className="dropdown-menu">
                   <div className="dropdown-item">
                     A collection is a list of bibliographic entries. To create a

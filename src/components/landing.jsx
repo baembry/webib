@@ -1,15 +1,13 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import FlashMessage from "./pageComponents/flashMessage";
-import axios from "axios";
-import auth from "../services/authService";
-import { flashMessage, logThisState } from "../utilities/flash";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import auth from '../services/authService';
 
 class Landing extends Component {
   //flashMessage is passed in props
   state = {
     showModal: false,
-    userId: false
+    userId: false,
   };
 
   componentDidMount() {
@@ -56,20 +54,20 @@ class Landing extends Component {
     try {
       this.handleToggleModal();
       this.setState({ working: true });
-      const res = await axios.post("/users", {
-        email: email.toString() + "@fakemail.com",
-        password: "12345",
-        createdAt: new Date()
+      const res = await axios.post('/users', {
+        email: email.toString() + '@fakemail.com',
+        password: '12345',
+        createdAt: new Date(),
       });
-      auth.login(res.headers["x-auth-token"]);
+      auth.login(res.headers['x-auth-token']);
 
       //force refresh
       this.props.toggleLoading();
-      window.location = "/entries?collectionId=allEntries";
+      window.location = '/entries?collectionId=allEntries';
     } catch (error) {
-      console.log("The error is: ", error);
+      console.log('The error is: ', error);
       this.props.toggleLoading();
-      this.props.flashMessage(error.message, "danger", 1500); //executed in app.js
+      this.props.flashMessage(error.message, 'danger', 1500); //executed in app.js
     }
   };
 
