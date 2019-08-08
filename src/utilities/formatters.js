@@ -13,10 +13,10 @@ export const LastFirstFirstLast = (
       arr[0].firstName
     )}${formatMiddleName(arr[0].middleName)}`;
 
-    var rest = "";
+    var rest = '';
     for (var i = 1; i < arr.length; i++) {
       if (i === useEtAlAfter && arr.length >= etAlThreshhold) {
-        rest += ", et al.";
+        rest += ', et al.';
         break;
       } else if (i === arr.length - 1) {
         rest += `, ${connector} ${formatFirstName(
@@ -42,13 +42,13 @@ export const LastFirstLastFirst = (
 ) => {
   return function(arr) {
     sort(arr);
-    const start = `${arr[0].lastName}, ${formatFirstName(
-      arr[0].firstName
-    )}${formatMiddleName(arr[0].middleName)}`;
-    var rest = "";
+    const start = `${arr[0].lastName}, ${formatFirstName(arr[0].firstName)}${
+      arr[0].middleName ? formatMiddleName(arr[0].middleName) : ''
+    }`;
+    var rest = '';
     for (var i = 1; i < arr.length; i++) {
       if (i === useEtAlAfter && arr.length >= etAlThreshhold) {
-        rest += ", et al.";
+        rest += ', et al.';
         break;
       } else if (i === arr.length - 1) {
         rest += `, ${connector} ${arr[i].lastName}, ${formatFirstName(
@@ -77,13 +77,13 @@ export const FirstLastFirstLast = (
     const start =
       arr[0].firstName +
       formatMiddleName(arr[0].middleName) +
-      " " +
+      ' ' +
       arr[0].lastName;
 
-    var rest = "";
+    var rest = '';
     for (var i = 1; i < arr.length; i++) {
       if (i === useEtAlAfter && arr.length >= etAlThreshhold) {
-        rest += ", et al.";
+        rest += ', et al.';
         break;
       } else if (i === arr.length - 1 && arr.length === 2) {
         rest += ` ${connector} ${formatFirstName(
@@ -105,23 +105,19 @@ export const FirstLastFirstLast = (
 
 //these are the same. deprecate
 export const getFirstInitial = name => {
-  return name ? name.slice(0, 1) + "." : "";
+  return name ? name.slice(0, 1) + '.' : '';
 };
 
 export const getMiddleInitial = name => {
-  return name ? " " + name.slice(0, 1) + "." : "";
+  return name ? ' ' + name.slice(0, 1) + '.' : '';
 };
 
 export const getFirstName = name => {
-  return name || "";
+  return name || '';
 };
 
 export const getMiddleName = name => {
-  if (name === undefined) {
-    return "";
-  } else {
-    return " " + name;
-  }
+  return name ? ' ' + name : '';
 };
 
 export const truncEndPage = pageRange => {
@@ -131,7 +127,7 @@ export const truncEndPage = pageRange => {
     return pageRange;
   }
 
-  let pageArr = pageRange.split("-");
+  let pageArr = pageRange.split('-');
   const startPage = pageArr[0];
   let endPage = pageArr[1];
   let trunc;
@@ -160,7 +156,7 @@ export const truncEndPage = pageRange => {
     }
   }
 
-  return startPage + "-" + trunc;
+  return startPage + '-' + trunc;
 };
 
 export const noFormat = _ => _;
@@ -190,5 +186,5 @@ export const formatMap = {
   truncEndPage,
   noFormat,
   sortByLastName,
-  noOrder
+  noOrder,
 };
