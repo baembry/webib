@@ -71,27 +71,14 @@ function matches(firstObject, secondObject) {
     if (Object.keys(obj2).length === 0) {
       return true;
     } else {
-      // console.log(`Mismatch. Obj1 has more keys than obj2.`);
-      // console.log(obj1);
-      // console.log(obj2);
       return false;
     }
   }
   for (let key in obj1) {
     if (!obj2.hasOwnProperty(key)) {
-      // console.log(`Mismatch. Obj1 has key ${key}, but obj2 does not.`);
-      // console.log(obj1);
-      // console.log(obj2);
       return false;
     }
     if (typeof obj1[key] === 'string' && obj1[key] !== obj2[key]) {
-      // console.log(
-      //   `Mismatch. Obj1 contains value ${
-      //     obj1[key]
-      //   } at ${key}, but obj2 contains the value ${obj2[key]} at ${[key]}.`
-      // );
-      // console.log(obj1);
-      // console.log(obj2);
       return false;
     }
     if (typeof obj1[key] === 'object') {

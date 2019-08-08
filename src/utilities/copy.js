@@ -6,6 +6,7 @@ const copy = function() {
   selection.removeAllRanges();
   selection.addRange(range);
   document.execCommand('copy');
+  selection.removeAllRanges();
 };
 
 export default copy;

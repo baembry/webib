@@ -143,8 +143,11 @@ class FormClass extends Component {
   };
 
   handleFilter = async e => {
-    let filtered = await handleSearch(this.state.data);
-    this.setState({ filtered });
+    //search only if data was entered
+    if (e.target.value.length > 0) {
+      let filtered = await handleSearch(this.state.data);
+      this.setState({ filtered });
+    }
   };
 
   //argument e doesn't do anything but is needed for display
