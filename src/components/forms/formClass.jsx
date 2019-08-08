@@ -41,24 +41,41 @@ class FormClass extends Component {
     //the following sets values for input fields so they can be controlled
     let dataClone = { ...this.state.data };
     this.state.fieldsToGenerate.forEach(field => {
-      this.state.data[field] = '';
+      dataClone[field] = '';
     });
+    this.state.data = dataClone;
   }
+
   async componentDidMount() {
     auth.setUser(this);
     const { data: entries } = await axios.get('/all-entries');
     this.setState({ entries });
+    this.initializePersons();
+  }
+
+  initializePersons() {
+    //populates authors, editors, translators with empty persons objects
+    //otherwise React throws a warning about controlled components
+    const counters = { ...this.state.counters };
+    const data = { ...this.state.data };
+    for (let personType in counters) {
+      for (let i = 0; i < counters[personType]; i++) {
+        data[personType].push({ firstName: '', middleName: '', lastName: '' });
+      }
+    }
+    this.setState({ data });
   }
 
   //==================Handlers=============================//
   //target is passed from the function call in the button; target is not an event
+  //target is person type. Like 'authors' or 'editors'
   handleAddPerson = target => {
     let counters = { ...this.state.counters };
     counters[target] += 1;
     this.setState({ counters });
     //this is so the new component is controlled
     let data = { ...this.state.data };
-    data[target].push({ firstName: '', lastName: '' });
+    data[target].push({ firstName: '', middleName: '', lastName: '' });
     this.setState({ data });
   };
 
@@ -85,7 +102,7 @@ class FormClass extends Component {
   handleChange = async e => {
     let targetName = e.currentTarget.name;
     if (targetName.includes('[')) {
-      //handle change for arrays of data; event target name will be of form 'key[i]key'
+      //handle change for arrays of data; event target name will be of form 'key[i]key', like 'authors[2]firstName
       let key1 = targetName.slice(0, targetName.indexOf('['));
       let index = targetName.slice(
         targetName.indexOf('[') + 1,
@@ -96,15 +113,15 @@ class FormClass extends Component {
       //preserve the data already in data[key1][index], or else give it an initial value to be modified
       data[key1][index] = data[key1][index] || {};
       data[key1][index][key2] = e.currentTarget.value;
-      await this.setState({ data: data });
 
+      await this.setState({ data });
       this.validateForm();
     } else {
       //handle change for data key-value; event target name is name of data key.
       let data = { ...this.state.data };
       data[targetName] = e.currentTarget.value;
 
-      await this.setState({ data: data });
+      await this.setState({ data });
       this.validateForm();
     }
   };

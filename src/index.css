@@ -162,9 +162,9 @@ body {
 .showEntry {
   background: white;
   border: 2px solid grey;
-
   padding: 1rem;
   position: absolute;
+  top: 10%;
   z-index: 100;
   width: 78vw;
 }
