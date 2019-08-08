@@ -2,7 +2,11 @@ import { Component } from 'react';
 import axios from 'axios';
 import auth from '../../services/authService';
 import forms from '../../utilities/forms';
-import { search, eliminateDuplicates } from '../../utilities/search';
+import {
+  search,
+  eliminateDuplicates,
+  handleSearch,
+} from '../../utilities/search';
 
 class FormClass extends Component {
   state = {
@@ -48,8 +52,9 @@ class FormClass extends Component {
 
   async componentDidMount() {
     auth.setUser(this);
-    const { data: entries } = await axios.get('/all-entries');
-    this.setState({ entries });
+    //this get is not s
+    // const { data: entries } = await axios.get('/all-entries');
+    // this.setState({ entries });
     this.initializePersons();
   }
 
@@ -142,11 +147,8 @@ class FormClass extends Component {
   };
 
   handleFilter = async e => {
-    if (this.state.filtered) {
-      let filtered = search(this.state.entries, this.state.data);
-      filtered = eliminateDuplicates(filtered);
-      this.setState({ filtered });
-    }
+    let filtered = await handleSearch(this.state.data);
+    this.setState({ filtered });
   };
 
   //e doesn't do anything but is needed for display

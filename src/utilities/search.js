@@ -1,8 +1,10 @@
+import axios from 'axios';
+
 export const search = (entries, data) => {
   const fields = Object.keys(data);
   let filtered = [...entries];
   fields.forEach(field => {
-    if (data[field] && typeof data[field] === "string") {
+    if (data[field] && typeof data[field] === 'string') {
       filtered = filtered.filter(entry => {
         return entry[field]
           .toLowerCase()
@@ -39,7 +41,7 @@ export const contains = (entry, term) => {
   const keys = Object.keys(entry);
   keys.forEach(key => {
     if (
-      typeof entry[key] === "string" &&
+      typeof entry[key] === 'string' &&
       entry[key].toLowerCase().includes(term.toLowerCase())
     ) {
       result = true;
@@ -82,7 +84,7 @@ function matches(firstObject, secondObject) {
       // console.log(obj2);
       return false;
     }
-    if (typeof obj1[key] === "string" && obj1[key] !== obj2[key]) {
+    if (typeof obj1[key] === 'string' && obj1[key] !== obj2[key]) {
       // console.log(
       //   `Mismatch. Obj1 contains value ${
       //     obj1[key]
@@ -92,7 +94,7 @@ function matches(firstObject, secondObject) {
       // console.log(obj2);
       return false;
     }
-    if (typeof obj1[key] === "object") {
+    if (typeof obj1[key] === 'object') {
       let theyMatch = matches(obj1[key], obj2[key]);
       if (!theyMatch) {
         return false;
@@ -126,6 +128,19 @@ export const eliminateDuplicates = arrayOfObjects => {
     }
   });
   return result;
+};
+
+export const handleSearch = async function(entry) {
+  try {
+    console.log('Searching...', entry);
+    const results = await axios.post('/entries/search', {
+      data: entry,
+    });
+    console.log('Search results: ', results);
+    return results.data;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export default { search, eliminateDuplicates };
