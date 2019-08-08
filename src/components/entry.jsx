@@ -131,7 +131,7 @@ const Entry = ({
   };
 
   return (
-    <div className="clickable hover">
+    <div className="clickable hover entry__container">
       <input
         type="checkbox"
         value={entry._id}

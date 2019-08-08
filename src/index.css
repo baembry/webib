@@ -146,6 +146,11 @@ body {
   margin: 5px;
 } */
 
+.entry__container {
+  display: flex;
+  align-items: center;
+}
+
 .entries .entry {
   margin: 0.23rem 0.23rem;
 }
