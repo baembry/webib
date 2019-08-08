@@ -147,12 +147,14 @@ class FormClass extends Component {
     this.setState({ filtered });
   };
 
-  //e doesn't do anything but is needed for display
+  //argument e doesn't do anything but is needed for display
+  //this copies a selected entry and populates state with it
   handleCopyEntry = async (e, entry) => {
     delete entry._id;
     await this.setState({ data: entry });
     this.validateForm();
   };
+
   //******************************************************** */
   handleSubmit = async e => {
     e.preventDefault();
