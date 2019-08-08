@@ -148,12 +148,9 @@ body {
 
 .entry__container {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 
-.entries .entry {
-  margin: 0.23rem 0.23rem;
-}
 /* ===================SHOW ENTRY MODAL============================= */
 
 .showEntry__backdrop {
