@@ -1,8 +1,10 @@
-import { formatMap } from "../utilities/formatters";
-import { sortMap } from "../utilities/sortEntries";
-import { sortEntries } from "./sortEntries";
+import { formatMap } from '../utilities/formatters';
+import { sortMap } from '../utilities/sortEntries';
+import { sortEntries } from './sortEntries';
 
 //the default templates are from Chicago 16 Bibliography
+//this function recieves as an argument a style object as in styles.js
+//the function then creates an instance with the proper methods
 export function Style({
   label,
   primaryPersonFormatter,
@@ -16,7 +18,7 @@ export function Style({
   styles,
   useEtAlAfter,
   etAlThreshhold,
-  templates
+  templates,
 }) {
   this.label = label;
   this.firstNameFormatter = formatMap[firstNameFormatter];
@@ -42,6 +44,8 @@ export function Style({
     etAlThreshhold
   );
   this.pageFormatter = formatMap[pageFormatter];
+
+  //yields an array of sorting algorithms
   this.sortBy = sortBy.map(algorithm => sortMap[algorithm]);
 
   this.sortAlgorithm = function(entries) {
@@ -55,8 +59,8 @@ export function Style({
     format: {
       authors: this.primaryPersonFormatter,
       editors: this.secondaryPersonFormatter,
-      translators: this.secondaryPersonFormatter
-    }
+      translators: this.secondaryPersonFormatter,
+    },
   };
   this.article = {
     templates: templates.article,
@@ -65,8 +69,8 @@ export function Style({
     format: {
       authors: this.primaryPersonFormatter,
       translators: this.secondaryPersonFormatter,
-      pageRange: this.pageFormatter
-    }
+      pageRange: this.pageFormatter,
+    },
   };
 
   this.editedVolume = {
@@ -75,8 +79,8 @@ export function Style({
     style: styles.editedVolume,
     format: {
       editors: this.primaryPersonFormatter,
-      translators: this.secondaryPersonFormatter
-    }
+      translators: this.secondaryPersonFormatter,
+    },
   };
 
   this.multivolumeWorkWithAuthor = {
@@ -86,8 +90,8 @@ export function Style({
     format: {
       authors: this.primaryPersonFormatter,
       editors: this.secondaryPersonFormatter,
-      translators: this.secondaryPersonFormatter
-    }
+      translators: this.secondaryPersonFormatter,
+    },
   };
 
   this.multivolumeWorkWithEditor = {
@@ -97,8 +101,8 @@ export function Style({
     format: {
       editors: this.primaryPersonFormatter,
       authors: this.secondaryPersonFormatter,
-      translators: this.secondaryPersonFormatter
-    }
+      translators: this.secondaryPersonFormatter,
+    },
   };
   this.bookContribution = {
     templates: templates.bookContribution,
@@ -108,8 +112,8 @@ export function Style({
       authors: this.primaryPersonFormatter,
       editors: this.secondaryPersonFormatter,
       translators: this.secondaryPersonFormatter,
-      pageRange: this.pageFormatter
-    }
+      pageRange: this.pageFormatter,
+    },
   };
   this.oneVolumeOfMultivolumeWorkWithAuthor = {
     templates: templates.oneVolumeOfMultivolumeWorkWithAuthor,
@@ -118,8 +122,8 @@ export function Style({
     format: {
       authors: this.primaryPersonFormatter,
       editors: this.secondaryPersonFormatter,
-      translators: this.secondaryPersonFormatter
-    }
+      translators: this.secondaryPersonFormatter,
+    },
   };
   this.oneVolumeOfMultivolumeWorkWithEditor = {
     templates: templates.oneVolumeOfMultivolumeWorkWithEditor,
@@ -128,7 +132,7 @@ export function Style({
     format: {
       editors: this.primaryPersonFormatter,
       authors: this.secondaryPersonFormatter,
-      translators: this.secondaryPersonFormatter
-    }
+      translators: this.secondaryPersonFormatter,
+    },
   };
 }

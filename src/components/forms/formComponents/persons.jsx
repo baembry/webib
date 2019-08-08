@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const getLabel = name => {
   return name.slice(0, 1).toUpperCase() + name.slice(1, -1);
@@ -9,7 +9,7 @@ const Persons = ({
   handleChange,
   handleFilter,
   data,
-  requiredFields
+  requiredFields,
 }) => {
   const types = Object.keys(counters);
   return types.map(personType => {
@@ -19,48 +19,47 @@ const Persons = ({
       return (
         <React.Fragment key={index}>
           <div className="form-group">
-            <label>{label + " " + personNumber + " First Name"}</label>
+            <label>{label + ' ' + personNumber + ' First Name'}</label>
             <input
               type="text"
               title="Will be rendered as entered."
-              name={personType + "[" + index + "]firstName"}
+              name={personType + '[' + index + ']firstName'}
               value={
-                data[personType][index] ? data[personType][index].firstName : ""
+                //this ternary isn't strictly necessary, but it's more robust in case data[personType][index] does not exist
+                data[personType][index] ? data[personType][index].firstName : ''
               }
               className="form-control"
-              placeholder={label + " " + personNumber + " First Name"}
-              onBlur={handleFilter}
+              placeholder={label + ' ' + personNumber + ' First Name'}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label>{label + " " + personNumber + " Middle Name"}</label>
+            <label>{label + ' ' + personNumber + ' Middle Name'}</label>
             <input
               type="text"
               title="Will be rendered as entered."
-              name={personType + "[" + index + "]middleName"}
+              name={personType + '[' + index + ']middleName'}
               value={
                 data[personType][index]
                   ? data[personType][index].middleName
-                  : ""
+                  : ''
               }
               className="form-control"
-              placeholder={label + " " + personNumber + " Middle Name"}
-              onBlur={handleFilter}
+              placeholder={label + ' ' + personNumber + ' Middle Name'}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label>{label + " " + personNumber + " Last Name"}</label>
+            <label>{label + ' ' + personNumber + ' Last Name'}</label>
             <input
               type="text"
               title="Will be rendered as entered."
-              name={personType + "[" + index + "]lastName"}
+              name={personType + '[' + index + ']lastName'}
               value={
-                data[personType][index] ? data[personType][index].lastName : ""
+                data[personType][index] ? data[personType][index].lastName : ''
               }
               className="form-control"
-              placeholder={label + " " + personNumber + " Last Name"}
+              placeholder={label + ' ' + personNumber + ' Last Name'}
               onBlur={handleFilter}
               onChange={handleChange}
               required={requiredFields.includes(personType)}

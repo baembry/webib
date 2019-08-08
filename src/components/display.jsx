@@ -1,16 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import axios from "axios";
+import axios from 'axios';
 
-import auth from "../services/authService";
+import auth from '../services/authService';
 
-import styles from "../utilities/styles";
-import { contains } from "../utilities/search";
-import { parse } from "../utilities/queryStringParser";
-import { Style } from "../utilities/styleObj";
+import styles from '../utilities/styles';
+import { contains } from '../utilities/search';
+import { parse } from '../utilities/queryStringParser';
+import { Style } from '../utilities/styleObj';
+import copy from '../utilities/copy';
 
-import ShowEntry from "./showEntry";
-import Entry from "./entry";
+import ShowEntry from './showEntry';
+import Entry from './entry';
 
 class Display extends Component {
   state = {
@@ -27,7 +28,7 @@ class Display extends Component {
     searchBase: [],
     useEmDash: false,
     serializeDates: false,
-    loading: true
+    loading: true,
   };
 
   async componentDidMount() {
@@ -35,16 +36,16 @@ class Display extends Component {
 
     const { collectionId } = parse(this.props.location.search);
     try {
-      const { data: entries } = await axios.get("/entries");
-      const { data: collections } = await axios.get("/collections");
-      let { data: myStyles } = await axios.get("/styles");
+      const { data: entries } = await axios.get('/entries');
+      const { data: collections } = await axios.get('/collections');
+      let { data: myStyles } = await axios.get('/styles');
       myStyles = myStyles.concat(styles);
       await this.setState({ entries, collections, myStyles });
 
       const activeStyle = new Style(myStyles[0]);
       await this.setState({ activeStyle });
 
-      if (collectionId && collectionId !== "allEntries") {
+      if (collectionId && collectionId !== 'allEntries') {
         var entriesToShow = this.serializeDates(
           this.sortEntries(this.getEntriesFromCollection(collectionId))
         );
@@ -55,10 +56,10 @@ class Display extends Component {
         entriesToShow,
         collectionId,
         searchBase: entriesToShow,
-        loading: false
+        loading: false,
       });
     } catch (error) {
-      this.props.flashMessage(error.message, "danger", 1500);
+      this.props.flashMessage(error.message, 'danger', 1500);
       this.setState({ loading: false });
     }
   }
@@ -83,11 +84,11 @@ class Display extends Component {
   };
 
   serializeDates = entries => {
-    const letters = "abcdefghijklmnopqrstuvwxyz";
+    const letters = 'abcdefghijklmnopqrstuvwxyz';
     let letterIndex = 0;
     //this is changing state directly. wierd.
     let entriesMutanda = [...entries];
-    entriesMutanda.forEach(entry => (entry.annoAddendum = ""));
+    entriesMutanda.forEach(entry => (entry.annoAddendum = ''));
     for (let i = 0; i < entriesMutanda.length - 1; i++) {
       //console.log(this.getPrimaryPerson(entriesMutanda[i]));
       if (
@@ -120,7 +121,7 @@ class Display extends Component {
     const entryToShow = entriesToShow.find(el => el._id === entry._id);
     this.setState({
       showEntry: true,
-      entryToShow: entryToShow
+      entryToShow: entryToShow,
     });
   };
 
@@ -147,15 +148,15 @@ class Display extends Component {
     for (let entryId of entriesToMove) {
       try {
         console.log(`adding ${entryId} to collection ${collectionId}`);
-        let response = await axios.put("/collections/" + collectionId, {
+        let response = await axios.put('/collections/' + collectionId, {
           entryId,
-          add: true
+          add: true,
         });
         console.log(response);
       } catch (error) {
         await this.props.flashMessage(
-          "Error updating collection: " + error.message,
-          "danger",
+          'Error updating collection: ' + error.message,
+          'danger',
           1500
         );
         procede = false;
@@ -164,7 +165,7 @@ class Display extends Component {
     this.props.toggleLoading();
     if (procede) {
       window.location =
-        this.props.location.pathname + "?collectionId=" + collectionId;
+        this.props.location.pathname + '?collectionId=' + collectionId;
     }
   };
 
@@ -185,15 +186,15 @@ class Display extends Component {
 
     //update db
     try {
-      await axios.put("/collections/" + this.state.collectionId, {
+      await axios.put('/collections/' + this.state.collectionId, {
         entryId: id,
-        add: false //this tells the route to delete instead of adding
+        add: false, //this tells the route to delete instead of adding
       });
-      this.props.flashMessage("Entry Deleted from Collection", "success", 1500);
+      this.props.flashMessage('Entry Deleted from Collection', 'success', 1500);
     } catch (error) {
       this.props.flashMessage(
-        "Error deleting from collection " + error.message,
-        "danger",
+        'Error deleting from collection ' + error.message,
+        'danger',
         1500
       );
       this.setState(originalState);
@@ -223,13 +224,13 @@ class Display extends Component {
 
     //update db
     try {
-      await axios.delete("/entries/" + id);
-      await this.props.flashMessage("Entry Deleted", "success", 1500);
+      await axios.delete('/entries/' + id);
+      await this.props.flashMessage('Entry Deleted', 'success', 1500);
       this.setState({ showEntry: false });
     } catch (error) {
       await this.props.flashMessage(
-        "There was a problem deleting the entry: " + error.message,
-        "success",
+        'There was a problem deleting the entry: ' + error.message,
+        'success',
         1500
       );
       this.setState(originalState);
@@ -249,7 +250,7 @@ class Display extends Component {
   handleCollectionSelect = e => {
     var collectionId = e.currentTarget.value;
     var entriesToShow;
-    if (collectionId === "allEntries") {
+    if (collectionId === 'allEntries') {
       entriesToShow = this.serializeDates(
         this.sortEntries([...this.state.entries])
       );
@@ -261,10 +262,10 @@ class Display extends Component {
     this.setState({
       entriesToShow,
       collectionId,
-      searchBase: entriesToShow
+      searchBase: entriesToShow,
     });
     //this url change is epiphenomenal but helps keep the place for reloading
-    this.props.history.push("/entries?collectionId=" + collectionId);
+    this.props.history.push('/entries?collectionId=' + collectionId);
   };
 
   handleSubmit = async e => {
@@ -272,15 +273,15 @@ class Display extends Component {
     this.props.toggleLoading();
     const collectionName = e.currentTarget.elements[0].value;
     try {
-      let { data: newCollection } = await axios.post("/collections", {
+      let { data: newCollection } = await axios.post('/collections', {
         userId: this.state.userId,
-        name: collectionName
+        name: collectionName,
       });
-      window.location = "/entries?collectionId=" + newCollection._id;
+      window.location = '/entries?collectionId=' + newCollection._id;
     } catch (error) {
       this.props.flashMessage(
-        "Error making collection: " + error.message,
-        "danger",
+        'Error making collection: ' + error.message,
+        'danger',
         1500
       );
     }
@@ -320,10 +321,15 @@ class Display extends Component {
     return result;
   };
 
+  handleCopy() {
+    copy();
+    this.props.flashMessage('Copied!', 'success', 750);
+  }
+
   renderContent = () => {
     //do not render checkbox if no collections
     const checkboxDisplay =
-      this.state.collections.length > 0 ? "inline" : "none";
+      this.state.collections.length > 0 ? 'inline' : 'none';
     if (!this.state.loading) {
       return (
         <div className="entries">
@@ -334,6 +340,12 @@ class Display extends Component {
             disabled={this.state.searchBase.length === 0}
             onChange={this.handleSearch}
           />
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={() => this.handleCopy()}
+          >
+            Copy
+          </button>
 
           {/* ============CONDITIONALLY RENDER SHOWENTRY============== */}
           {this.state.showEntry ? (
@@ -347,20 +359,22 @@ class Display extends Component {
             />
           ) : null}
           {/* =====================RENDER ADD TO COLLECTION OR ENTRIES==================== */}
-          {this.state.entriesToShow.map((entry, i, arr) => (
-            <Entry
-              key={i}
-              entry={entry}
-              previousEntry={arr[i - 1]}
-              // nextEntry={arr[i + 1]}
-              style={this.state.activeStyle}
-              onClick={this.handleShow}
-              handleCheck={this.handleCheck}
-              checkboxDisplay={checkboxDisplay}
-              useEmDash={this.state.useEmDash}
-              serializeDates={this.state.serializeDates}
-            />
-          ))}
+          <div id="copy">
+            {this.state.entriesToShow.map((entry, i, arr) => (
+              <Entry
+                key={i}
+                entry={entry}
+                previousEntry={arr[i - 1]}
+                // nextEntry={arr[i + 1]}
+                style={this.state.activeStyle}
+                onClick={this.handleShow}
+                handleCheck={this.handleCheck}
+                checkboxDisplay={checkboxDisplay}
+                useEmDash={this.state.useEmDash}
+                serializeDates={this.state.serializeDates}
+              />
+            ))}
+          </div>
         </div>
       );
     } else {
