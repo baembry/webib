@@ -8,7 +8,7 @@ import styles from '../utilities/styles';
 import { contains } from '../utilities/search';
 import { parse } from '../utilities/queryStringParser';
 import { Style } from '../utilities/styleObj';
-import copy from '../utilities/copy';
+import { copyAll, copySelected } from '../utilities/copy';
 
 import ShowEntry from './showEntry';
 import Entry from './entry';
@@ -321,8 +321,14 @@ class Display extends Component {
     return result;
   };
 
-  handleCopy() {
-    copy();
+  handleCopyAll() {
+    copyAll();
+    this.props.flashMessage('Copied!', 'success', 750);
+  }
+
+  handleCopySelected() {
+    const selected = [...this.state.entriesToMove];
+    copySelected(selected);
     this.props.flashMessage('Copied!', 'success', 750);
   }
 
@@ -341,10 +347,16 @@ class Display extends Component {
             onChange={this.handleSearch}
           />
           <button
-            className="btn btn-primary btn-sm"
-            onClick={() => this.handleCopy()}
+            className="btn btn-primary btn-sm copy-button"
+            onClick={() => this.handleCopyAll()}
           >
-            Copy
+            Copy All
+          </button>
+          <button
+            className="btn btn-primary btn-sm copy-button"
+            onClick={() => this.handleCopySelected()}
+          >
+            Copy Selected
           </button>
 
           {/* ============CONDITIONALLY RENDER SHOWENTRY============== */}

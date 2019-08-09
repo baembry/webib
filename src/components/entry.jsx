@@ -138,7 +138,7 @@ const Entry = ({
         onClick={handleCheck}
         style={{ display: checkboxDisplay, marginRight: '0.5rem' }}
       />
-      <span className="entry" onClick={e => onClick(e, entry)}>
+      <span className="entry" id={entry._id} onClick={e => onClick(e, entry)}>
         {fillTemplate(entry)}
       </span>
     </div>

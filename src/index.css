@@ -142,9 +142,9 @@ body {
   width: auto;
 }
 
-/* .options div {
-  margin: 5px;
-} */
+.copy-button {
+  margin: 0 15px 10px 0;
+}
 
 .entry__container {
   display: flex;

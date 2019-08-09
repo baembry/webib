@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Display from "./display";
-import StyleDropdown from "./pageComponents/styleDropdown";
-import CollectionsDropdown from "./pageComponents/collectionsDropdown";
-import AddToCollection from "./forms/buttons/addToCollection";
+import Display from './display';
+import StyleDropdown from './pageComponents/styleDropdown';
+import CollectionsDropdown from './pageComponents/collectionsDropdown';
+import AddToCollection from './forms/buttons/addToCollection';
 
 class Entries extends Display {
   render() {
@@ -15,7 +15,7 @@ class Entries extends Display {
             <CollectionsDropdown
               collections={this.state.collections}
               handleCollectionSelect={this.handleCollectionSelect}
-              value={this.state.collectionId || "allEntries"}
+              value={this.state.collectionId || 'allEntries'}
             />
             <div>
               <form onSubmit={this.handleSubmit}>
@@ -34,10 +34,10 @@ class Entries extends Display {
           </div>
           <div className="create-options">
             <div className="btn-group" role="group" aria-label="Basic example">
-              {this.state.collectionId !== "allEntries" ? (
+              {this.state.collectionId !== 'allEntries' ? (
                 <Link
                   title="Create a new entry and add it to present collection"
-                  to={"/collections/" + this.state.collectionId + "/new-entry"}
+                  to={'/collections/' + this.state.collectionId + '/new-entry'}
                   className="btn btn-outline-primary create-entry"
                 >
                   Create Entry and Add to Collection
@@ -83,6 +83,7 @@ class Entries extends Display {
           </div>
         </div>
         {this.renderContent()}
+        <div id="clipboard" />
       </div>
     );
   }
