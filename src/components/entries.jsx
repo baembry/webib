@@ -32,6 +32,7 @@ class Entries extends Display {
               handleStyleSelect={this.handleStyleSelect}
             />
           </div>
+
           <div className="create-options">
             <div className="btn-group" role="group" aria-label="Basic example">
               {this.state.collectionId !== 'allEntries' ? (
