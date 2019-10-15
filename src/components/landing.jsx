@@ -94,19 +94,31 @@ class Landing extends Component {
 
   render() {
     return (
-      <div className="landing-container">
+      <React.Fragment>
         <div className="landing">
-          <h1>Welcome to Webib!</h1>
-          <h3>The world's simplest bibliography manager.</h3>
-
-          <ul>
-            <li>Cloud-based: never worry about conflicting data.</li>
-            <li>Collaborative: use other people's references.</li>
-            <li>Super simple: no tutorials or learning curve.</li>
-          </ul>
-          {this.renderButtons()}
+          <h1>Welcome to the world's</h1>
+          <h1>simplest</h1>
+          <h1>bibliography manager</h1>
+          <img
+            className="bookshelf"
+            alt="Bookshelf icon"
+            src="bookshelf.svg"
+          ></img>
+          <NavLink className="btn btn-secondary" to="/auth">
+            Get Started
+          </NavLink>
         </div>
-      </div>
+        <div className="attribution">
+          Icons made by{' '}
+          <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+            Freepik
+          </a>{' '}
+          from{' '}
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            www.flaticon.com
+          </a>
+        </div>
+      </React.Fragment>
     );
   }
 }

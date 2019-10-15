@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 20px;
   height: 100vh;
   width: 100vw;
 }
@@ -30,37 +31,21 @@ body {
   white-space: pre-wrap;
 }
 /* ===================LANDING PAGE============================= */
-.landing-container {
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(
-      rgb(227, 242, 253, 0.75),
-      rgb(227, 242, 253, 0.75)
-    ),
-    url('./assets/susan-yin-647448-unsplash.jpg') center;
-  background-size: cover;
-}
 
 .landing {
+  width: 100vw;
+  text-align: center;
+  padding-top: 3rem;
+}
+
+.landing h1 {
+  font-size: 1.7rem;
+}
+
+.landing img {
+  width: 27%;
+  display: block;
   margin: auto;
-  padding-top: 13vh;
-  width: 78%;
-  text-align: center;
-  position: relative;
-  font-weight: 900;
-}
-
-.landing ul {
-  list-style: none;
-  width: 78%;
-  margin: 2rem auto;
-  padding: 0;
-  text-align: left;
-  font-size: 1.27rem;
-}
-
-.landing ul li {
-  text-align: center;
 }
 
 .landing .exhortation {
@@ -74,6 +59,13 @@ body {
 .landing__modal {
   position: relative;
   top: -8rem;
+}
+
+.attribution {
+  font-size: 10px;
+  position: absolute;
+  bottom: 2px;
+  right: 10px;
 }
 
 /* ===================ENTRIES PAGE============================= */
@@ -128,11 +120,6 @@ body {
 .entries__controls .new-collection {
   width: 15rem;
 }
-
-/* .entries__controls > * {
-  margin: 0.272rem 0rem;
-  text-align: center;
-} */
 
 .search-bar {
   margin: 20px 0;
@@ -255,15 +242,17 @@ input:invalid {
 }
 /*============================REGISTER and LOGIN=========================*/
 
-.register,
-.login {
+.register {
   position: relative;
   width: 78%;
   margin: 2rem auto;
 }
 
-.register button,
-.login button {
+.register-buttons .btn {
+  margin-right: 2rem;
+}
+
+.register button {
   margin: 1rem 0;
 }
 .flash-container {

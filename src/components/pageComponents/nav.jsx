@@ -60,7 +60,7 @@ class NavBar extends Component {
       <React.Fragment>
         <nav className="navbar navbar-light">
           <NavLink className="nav-link" to="/">
-            Webib!
+            WeBib!
           </NavLink>
           {this.props.user ? (
             <React.Fragment>
