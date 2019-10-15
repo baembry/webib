@@ -32,10 +32,9 @@ class Display extends Component {
   };
 
   async componentDidMount() {
-    await auth.setUser(this);
-
     const { collectionId } = parse(this.props.location.search);
     try {
+      await auth.setUser(this);
       const { data: entries } = await axios.get('/entries');
       const { data: collections } = await axios.get('/collections');
       let { data: myStyles } = await axios.get('/styles');

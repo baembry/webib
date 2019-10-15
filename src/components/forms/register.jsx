@@ -33,7 +33,8 @@ class Register extends Component {
         this.login();
       }
       //force refresh
-      window.location = '/entries?collectionId=allEntries';
+      // window.location = '/entries?collectionId=allEntries';
+      this.props.history.push('/entries?collectionId=allEntries');
     } catch (error) {
       this.props.flashMessage(error.message, 'danger', 1500);
     }
@@ -50,14 +51,16 @@ class Register extends Component {
     auth.login(jwt);
   };
 
-  demo = async function() {
-    this.setState({
+  demo = async function(e) {
+    console.log(this);
+    await this.setState({
       data: {
         user: 'demo@demo.com',
         password: 'demo',
       },
     });
-    this.login();
+    console.log(this.state);
+    this.handleSubmit(e);
   };
 
   renderForm = () => {
@@ -96,7 +99,10 @@ class Register extends Component {
                 Register
               </NavLink>
             ) : null}
-            <button className="btn btn-secondary" onClick={this.demo}>
+            <button
+              className="btn btn-secondary"
+              onClick={this.demo.bind(this)}
+            >
               Demo
             </button>
           </div>
