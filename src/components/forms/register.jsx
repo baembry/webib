@@ -28,13 +28,14 @@ class Register extends Component {
     this.props.toggleLoading();
     try {
       if (this.props.location.pathname === '/users') {
-        this.register();
+        await this.register();
       } else {
-        this.login();
+        await this.login();
       }
       //force refresh
-      // window.location = '/entries?collectionId=allEntries';
-      this.props.history.push('/entries?collectionId=allEntries');
+      window.location = '/entries?collectionId=allEntries';
+      //@Todo: make this work
+      // this.props.history.push('/entries?collectionId=allEntries');
     } catch (error) {
       this.props.flashMessage(error.message, 'danger', 1500);
     }
@@ -52,15 +53,18 @@ class Register extends Component {
   };
 
   demo = async function(e) {
-    console.log(this);
-    await this.setState({
-      data: {
-        user: 'demo@demo.com',
-        password: 'demo',
-      },
-    });
-    console.log(this.state);
-    this.handleSubmit(e);
+    try {
+      await this.setState({
+        data: {
+          email: 'demo@demo.demo',
+          password: 'demodemo',
+        },
+      });
+      console.log(this.state);
+      this.login();
+    } catch (error) {
+      this.props.flashMessage(error.message, 'danger', 1500);
+    }
   };
 
   renderForm = () => {
