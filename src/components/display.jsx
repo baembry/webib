@@ -58,7 +58,7 @@ class Display extends Component {
         loading: false,
       });
     } catch (error) {
-      this.props.flashMessage(error.message, 'danger', 1500);
+      this.props.flashMessage(error.response.data, 'danger', 1500);
       this.setState({ loading: false });
     }
   }
@@ -154,7 +154,7 @@ class Display extends Component {
         console.log(response);
       } catch (error) {
         await this.props.flashMessage(
-          'Error updating collection: ' + error.message,
+          'Error updating collection: ' + error.response.data,
           'danger',
           1500
         );
@@ -192,7 +192,7 @@ class Display extends Component {
       this.props.flashMessage('Entry Deleted from Collection', 'success', 1500);
     } catch (error) {
       this.props.flashMessage(
-        'Error deleting from collection ' + error.message,
+        'Error deleting from collection ' + error.response.data,
         'danger',
         1500
       );
@@ -228,7 +228,7 @@ class Display extends Component {
       this.setState({ showEntry: false });
     } catch (error) {
       await this.props.flashMessage(
-        'There was a problem deleting the entry: ' + error.message,
+        'There was a problem deleting the entry: ' + error.response.data,
         'success',
         1500
       );
@@ -279,7 +279,7 @@ class Display extends Component {
       window.location = '/entries?collectionId=' + newCollection._id;
     } catch (error) {
       this.props.flashMessage(
-        'Error making collection: ' + error.message,
+        'Error making collection: ' + error.response.data,
         'danger',
         1500
       );

@@ -37,7 +37,7 @@ class Register extends Component {
       //@Todo: make this work
       // this.props.history.push('/entries?collectionId=allEntries');
     } catch (error) {
-      this.props.flashMessage(error.message, 'danger', 1500);
+      this.props.flashMessage(error.response.data, 'danger', 1500);
     }
     this.props.toggleLoading();
   };
@@ -63,7 +63,7 @@ class Register extends Component {
       console.log(this.state);
       this.login();
     } catch (error) {
-      this.props.flashMessage(error.message, 'danger', 1500);
+      this.props.flashMessage(error.response.data, 'danger', 1500);
     }
   };
 
