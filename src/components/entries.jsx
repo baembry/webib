@@ -14,7 +14,9 @@ class Entries extends Display {
           <div className="dropdowns">
             <CollectionsDropdown
               collections={this.state.collections}
-              handleCollectionSelect={this.handleCollectionSelect}
+              handleCollectionSelect={e =>
+                this.handleCollectionSelect(e.currentTarget.value)
+              }
               value={this.state.collectionId || 'allEntries'}
             />
             <div>

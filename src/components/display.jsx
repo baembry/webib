@@ -32,6 +32,7 @@ class Display extends Component {
   };
 
   async componentDidMount() {
+    console.log('Mounting...');
     const { collectionId } = parseQueryString(this.props.location.search);
     try {
       await auth.setUser(this);
@@ -63,8 +64,17 @@ class Display extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    console.log(prevProps.match.params);
+  //use this to update when All Entries is navigated
+  componentWillReceiveProps(nextProps) {
+    const { collectionId: nextCollection } = parseQueryString(
+      nextProps.location.search
+    );
+    const { collectionId: currentCollection } = parseQueryString(
+      this.props.location.search
+    );
+    if (nextCollection && currentCollection !== nextCollection) {
+      this.handleCollectionSelect(nextCollection);
+    }
   }
 
   getEntriesFromCollection = id => {
@@ -250,8 +260,7 @@ class Display extends Component {
     this.setState({ entriesToShow: filtered });
   };
 
-  handleCollectionSelect = e => {
-    var collectionId = e.currentTarget.value;
+  handleCollectionSelect = collectionId => {
     var entriesToShow;
     if (collectionId === 'allEntries') {
       entriesToShow = this.serializeDates(
