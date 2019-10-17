@@ -1,60 +1,60 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import axios from 'axios';
+// import axios from 'axios';
 import auth from '../../services/authService';
 
 class NavBar extends Component {
   state = {
     showModal: false,
   };
+  //deprecating...
+  // handleToggleModal = () => {
+  //   const showModal = this.state.showModal;
+  //   this.setState({ showModal: !showModal });
+  // };
+  // renderModal = () => {
+  //   var modal = null;
+  //   if (this.state.showModal) {
+  //     modal = (
+  //       <div className="alert alert-danger">
+  //         You will be logged in with a temporary user id. Your user id and all
+  //         your work will disappear if you log out, or after two days. If you
+  //         want to save your work, please register and sign in.
+  //         <div>
+  //           <button
+  //             className="btn btn-warning modal-btn"
+  //             onClick={this.handleContinue}
+  //           >
+  //             Continue
+  //           </button>
+  //           <NavLink className="btn btn-success modal-btn" to="/users">
+  //             Register
+  //           </NavLink>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  //   return modal;
+  // };
+  // handleContinue = async e => {
+  //   e.preventDefault();
+  //   const email = +new Date();
+  //   try {
+  //     const res = await axios.post('/users', {
+  //       email: email.toString() + '@fakemail.com',
+  //       password: '12345',
+  //       createdAt: new Date(),
+  //     });
+  //     auth.login(res.headers['x-auth-token']);
 
-  handleToggleModal = () => {
-    const showModal = this.state.showModal;
-    this.setState({ showModal: !showModal });
-  };
-  renderModal = () => {
-    var modal = null;
-    if (this.state.showModal) {
-      modal = (
-        <div className="alert alert-danger">
-          You will be logged in with a temporary user id. Your user id and all
-          your work will disappear if you log out, or after two days. If you
-          want to save your work, please register and sign in.
-          <div>
-            <button
-              className="btn btn-warning modal-btn"
-              onClick={this.handleContinue}
-            >
-              Continue
-            </button>
-            <NavLink className="btn btn-success modal-btn" to="/users">
-              Register
-            </NavLink>
-          </div>
-        </div>
-      );
-    }
-    return modal;
-  };
-  handleContinue = async e => {
-    e.preventDefault();
-    const email = +new Date();
-    try {
-      const res = await axios.post('/users', {
-        email: email.toString() + '@fakemail.com',
-        password: '12345',
-        createdAt: new Date(),
-      });
-      auth.login(res.headers['x-auth-token']);
-
-      //force refresh
-      window.location = '/entries?collectionId=allEntries';
-    } catch (error) {
-      this.flashMessage('Error: ' + error.message, 'danger', 1500);
-      console.log(error);
-    }
-  };
+  //     //force refresh
+  //     window.location = '/entries?collectionId=allEntries';
+  //   } catch (error) {
+  //     this.flashMessage('Error: ' + error.message, 'danger', 1500);
+  //     console.log(error);
+  //   }
+  // };
   render() {
     return (
       <React.Fragment>
@@ -136,17 +136,10 @@ class NavBar extends Component {
               <NavLink className="nav-link" to="/auth">
                 Login
               </NavLink>
-              {/* deprecating this option */}
-              {/* <div
-                className="nav-link clickable"
-                onClick={this.handleToggleModal}
-              >
-                Continue without Logging in
-              </div> */}
             </React.Fragment>
           )}
         </nav>
-        {this.renderModal()}
+        {/* {this.renderModal()} */}
       </React.Fragment>
     );
   }

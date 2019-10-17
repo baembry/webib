@@ -6,7 +6,7 @@ import auth from '../services/authService';
 
 import styles from '../utilities/styles';
 import { contains } from '../utilities/search';
-import { parse } from '../utilities/queryStringParser';
+import { parseQueryString } from '../utilities/queryStringParser';
 import { Style } from '../utilities/styleObj';
 import { copyAll, copySelected } from '../utilities/copy';
 
@@ -32,7 +32,7 @@ class Display extends Component {
   };
 
   async componentDidMount() {
-    const { collectionId } = parse(this.props.location.search);
+    const { collectionId } = parseQueryString(this.props.location.search);
     try {
       await auth.setUser(this);
       const { data: entries } = await axios.get('/entries');
@@ -61,6 +61,10 @@ class Display extends Component {
       this.props.flashMessage(error.response.data, 'danger', 1500);
       this.setState({ loading: false });
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps.match.params);
   }
 
   getEntriesFromCollection = id => {
