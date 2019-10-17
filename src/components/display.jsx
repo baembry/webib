@@ -332,9 +332,6 @@ class Display extends Component {
   }
 
   renderContent = () => {
-    //do not render checkbox if no collections
-    const checkboxDisplay =
-      this.state.collections.length > 0 ? 'inline' : 'none';
     if (!this.state.loading) {
       return (
         <div className="entries">
@@ -380,7 +377,6 @@ class Display extends Component {
                 style={this.state.activeStyle}
                 onClick={this.handleShow}
                 handleCheck={this.handleCheck}
-                checkboxDisplay={checkboxDisplay}
                 useEmDash={this.state.useEmDash}
                 serializeDates={this.state.serializeDates}
               />

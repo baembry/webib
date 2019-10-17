@@ -17,6 +17,12 @@ class Register extends Component {
     };
   }
 
+  componentDidMount() {
+    if (auth.userIsLoggedIn()) {
+      this.props.history.push('/entries?collectionId=allEntries');
+    }
+  }
+
   handleChange = e => {
     let data = { ...this.state.data };
     data[e.currentTarget.name] = e.currentTarget.value;
